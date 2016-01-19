@@ -1,0 +1,88 @@
+<script xmlns="http://www.w3.org/1999/html">
+    $(function () {
+        $(".food_pic").each(function () {
+            $(this).find("li:gt(4)").each(function () {
+                $(this).hide();
+            });
+            $(this).append('<p>» もっと見る</p>');
+            $(this).find("p:last").click(function () {
+                $(this).parent().find("li").show(400);
+                $(this).remove();
+            });
+        });
+    });</script>
+
+<div class="upside_content">
+  <div class="map">
+    <iframe frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/directions?origin=35.673827%2C%20139.769051&destination=<%= @latitude %>%2C%20<%= @longitude %>&key=AIzaSyBvJ6IRWBb3ZLUKCUGaANZJW_xgHjKCmPs&mode=walking" allowfullscreen></iframe>
+  </div>
+
+  <div class="shop_detail">
+    <p>店舗情報</p>
+    <img src="<%= @shop_image %>">
+
+    <p><%= @name %></p>
+
+    <p><%= @tel %></p>
+
+    <p><%= @category %></p>
+
+    <p>ランチ相場：<%= @lunch %>円</p>
+
+    <p>バウチャー：</p>
+    <a href="http://bv.edenred.jp/search_shop/search/" target="_blank">調べる</a>
+
+    <p><%= @station %>から徒歩<%= @walk %>分</p>
+
+    <p><%= @no_smoking %></p>
+    <%= form_tag :action => "next" do %>
+        <input type="submit" value="ちがう店舗">
+    <% end %>
+    <%= form_tag :action => "want_to_go" do %>
+        <input type="submit" value="行きたい">
+    <% end %>
+    <%= form_tag :action => "has_gone" do %>
+        <input type="submit" value="行った">
+    <% end %>
+
+  </div>
+</div>
+
+<div class="middle_content">
+  <div class="food_pic">
+    <ul>
+      <% @eles.first(2).each do |ele| %> <!-- first(2)は回数制限 -->
+          <li><img src="<%= ele %>"></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="downside_content">
+  <div class="tab-menu">
+    <ul>
+      <li id="left" class="selected">行きたい</li>
+      <li id="right">行った</li>
+    </ul>
+
+    <div class="contents">
+      <div class="left">
+        <% @wanted_rest_infos.each do |wanted_rest_info| %>
+            <a href="<%= wanted_rest_info["url"] %>" target="_blank">
+              <img src="<%= wanted_rest_info["image_url"]["shop_image1"] %>">
+              <p><%= wanted_rest_info["name"] %></p>
+            </a>
+        <% end %>
+      </div>
+      <div class="right">
+        <% @gone_rest_infos.each do |gone_rest_info| %>
+            <a href="<%= gone_rest_info["url"] %>" target="_blank">
+              <img src="<%= gone_rest_info["image_url"]["shop_image1"] %>">
+              <p><%= gone_rest_info["name"] %></p>
+            </a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

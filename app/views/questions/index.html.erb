@@ -1,0 +1,66 @@
+<div class="square">
+
+  <div id="ans_block1" class="selected">
+    <div class="question_title">
+      <p><%= @questions[0].title %></p>
+    </div>
+
+    <div class="answer<%= @questions[0].id %>">
+      <div id="ans1_1">
+        <input type="button" value="<%= @questions[0].answer1 %>">
+      </div>
+      <div id="ans1_2">
+        <input type="button" value="<%= @questions[0].answer2 %>">
+      </div>
+    </div>
+  </div>
+
+  <div id="ans_block2" class="selected">
+    <div class="question_title">
+      <p><%= @questions[1].title %></p>
+    </div>
+
+    <div class="answer<%= @questions[1].id %>">
+      <div id="ans2_1">
+        <input type="button" value="<%= @questions[1].answer1 %>">
+      </div>
+      <div id="ans2_2">
+        <input type="button" value="<%= @questions[1].answer2 %>">
+      </div>
+    </div>
+  </div>
+
+  <div id="ans_block3" class="selected">
+    <div class="question_title">
+      <p><%= @questions[2].title %></p>
+    </div>
+
+    <div class="answer<%= @questions[2].id %>">
+      <div id="ans3_1">
+        <%= form_tag :action => "answer" do %>
+            <!--jQueryで処理して、ここ↓に値を入れる-->
+            <input id="answer1_type" type="hidden" name="[answer1][answer_type]" value="">
+            <input id="question_id" type="hidden" name="[answer1][question_id]" value="<%= @questions[0].id %>">
+            <input id="answer2_type" type="hidden" name="[answer2][answer_type]" value="">
+            <input id="qustion_id" type="hidden" name="[answer2][question_id]" value="<%= @questions[1].id %>">
+            <input id="answer3_type" type="hidden" name="[answer3][answer_type]" value="">
+            <input id="question_id" type="hidden" name="[answer3][question_id]" value="<%= @questions[2].id %>">
+            <input type="submit" value="<%= @questions[2].answer1 %>">
+        <% end %>
+      </div>
+      <div id="ans3_2">
+        <%= form_tag :action => "answer" do %>
+            <!--jQueryで処理して、ここ↓に値を入れる-->
+            <input id="answer1_type" type="hidden" name="[answer1][answer_type]" value="">
+            <input id="question_id" type="hidden" name="[answer1][question_id]" value="<%= @questions[0].id %>">
+            <input id="answer2_type" type="hidden" name="[answer2][answer_type]" value="">
+            <input id="qustion_id" type="hidden" name="[answer2][question_id]" value="<%= @questions[1].id %>">
+            <input id="answer3_type" type="hidden" name="[answer3][answer_type]" value="">
+            <input id="question_id" type="hidden" name="[answer3][question_id]" value="<%= @questions[2].id %>">
+            <input type="submit" value="<%= @questions.third.answer2 %>">
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
