@@ -45,3 +45,8 @@ gem 'sprockets', '2.11.0'
 gem 'mechanize'
 
 gem 'faraday', '~> 0.9.0'
+
+gem 'config'
+
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
