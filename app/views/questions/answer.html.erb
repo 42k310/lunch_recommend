@@ -49,15 +49,16 @@
   </div>
 </div>
 
-<div class="middle_content">
-  <div class="food_pic">
-    <ul>
-      <% @eles.first(2).each do |ele| %> <!-- first(2)は回数制限 -->
-          <li><img src="<%= ele %>"></li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+<!--want_to_goをすると二回目以降nilと言われてしまうため、一旦コメントアウト-->
+<!--<div class="middle_content">-->
+  <!--<div class="food_pic">-->
+    <!--<ul>-->
+      <!-- <#% @eles.first(2).each do |ele| %> <!-- first(2)は回数制限なので消してもOK -->
+          <!--<li><img src="<#%= ele %>"></li>-->
+      <!--<#% end %>-->
+    <!--</ul>-->
+  <!--</div>-->
+<!--</div>-->
 
 <div class="downside_content">
   <div class="tab-menu">
@@ -67,21 +68,22 @@
     </ul>
 
     <div class="contents">
-      <div class="left">
-        <% @wanted_rest_infos.each do |wanted_rest_info| %>
-            <a href="<%= wanted_rest_info["url"] %>" target="_blank">
-              <img src="<%= wanted_rest_info["image_url"]["shop_image1"] %>">
-              <p><%= wanted_rest_info["name"] %></p>
-            </a>
-        <% end %>
-      </div>
+      <!--want_to_goをすると二回目以降nilと言われてしまうため、一旦コメントアウト-->
+      <!--<div class="left">-->
+        <!--<#% @wanted_rest_infos.each do |wanted_rest_info| %>-->
+            <!--<a href="<#%= wanted_rest_info["url"] %>" target="_blank">-->
+              <!--<img src="<#%= wanted_rest_info["image_url"]["shop_image1"] %>">-->
+              <!--<p><#%= wanted_rest_info["name"] %></p>-->
+            <!--</a>-->
+        <!--<#% end %>-->
+      <!--</div>-->
       <div class="right">
-        <% @gone_rest_infos.each do |gone_rest_info| %>
-            <a href="<%= gone_rest_info["url"] %>" target="_blank">
-              <img src="<%= gone_rest_info["image_url"]["shop_image1"] %>">
-              <p><%= gone_rest_info["name"] %></p>
-            </a>
-        <% end %>
+        <!--<"% @gone_rest_infos.each do |gone_rest_info| %>-->
+            <!--<a href="<"%= gone_rest_info["url"] %>" target="_blank">-->
+              <!--<img src="<"%= gone_rest_info["image_url"]["shop_image1"] %>">-->
+              <!--<p><"%= gone_rest_info["name"] %></p>-->
+            <!--</a>-->
+        <!--<"% end %>-->
       </div>
     </div>
   </div>

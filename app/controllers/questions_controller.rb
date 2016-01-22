@@ -21,17 +21,23 @@ class QuestionsController < ApplicationController
     AnswerHistories.create(answer_type: answer_type2, question_id: q_id2)
     AnswerHistories.create(answer_type: answer_type3, question_id: q_id3)
 
-    @questions = Questions.order("RANDOM()").limit(3) # indexアクションの中の@questionsとは異なるものになってしまっている
-    answer1 = params[:answer1]
-    answer2 = params[:answer2]
-    answer3 = params[:answer3]
     # レコメンド
-    matches1 = Matches.where("shop_question#{@questions[0]["id"]} = ?", "#{answer1["answer_type"]}").order("RANDOM()")
-    matches2 = matches1.where("shop_question#{@questions[1]["id"]} = ?", "#{answer2["answer_type"]}").order("RANDOM()")
-    matches3 = matches2.where("shop_question#{@questions[2]["id"]} = ?", "#{answer3["answer_type"]}").order("RANDOM()")
+    matches1 = Matches.where("shop_question#{q_id1} = ?", "#{answer_type1}").order("RANDOM()")
+    matches2 = matches1.where("shop_question#{q_id2} = ?", "#{answer_type2}").order("RANDOM()")
+    matches3 = matches2.where("shop_question#{q_id3} = ?", "#{answer_type3}").order("RANDOM()")
     not_match = Matches.all
 
-    match = matches3[0]
+    if matches3.present?
+      match = matches3[0]
+    elsif matches2.present?
+      match = matches2[0]
+    elsif matches1.present?
+      match = matches1[0]
+    else
+      match = not_match[0]
+    end
+
+
     @gnavi_id = Shops.find(match.id).gnavi_id # できたらアソシエーション使って書きたい
 
     # ぐるなびAPI利用(準備)
@@ -90,19 +96,18 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def next
+    render :action => "answer"
+  end
+
   def want_to_go
     Actions.create(action_kind: 1, shop_id: 2, user_id: 2) # Shops.find(match.id).id
     render :action => "answer"
-    redirect_to :action => "answer"
   end
 
   def has_gone
     Actions.create(action_kind: 2, shop_id: 1, user_id: 1) # Shops.find(match.id).id
-    redirect_to :action => "answer"
-  end
-
-  def next
-    redirect_to :action => "answer"
+    render :action => "answer"
   end
 
 end
