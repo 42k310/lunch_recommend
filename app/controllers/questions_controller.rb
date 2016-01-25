@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Questions.order("RANDOM()").limit(3)
+    p @questions
   end
 
   def answer

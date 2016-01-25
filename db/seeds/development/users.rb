@@ -1,6 +1,4 @@
 Users.create(
-    :id => ,
-    :email => ,
-    :created_at => ,
-    :updated_at => ,
+    :id => 1,
+    :email => "test@test.com",
 )
