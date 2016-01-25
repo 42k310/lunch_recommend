@@ -1,4 +1,4 @@
 class Match < ActiveRecord::Base
-  belongs_to :shops
-  belongs_to :questions
+  belongs_to :shop
+  belongs_to :question
 end

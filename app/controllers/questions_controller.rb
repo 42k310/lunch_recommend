@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
 
   def index
-    @questions = Questions.order("RANDOM()").limit(3)
+    @questions = Question.order("RANDOM()").limit(3)
     p @questions
   end
 
@@ -18,15 +18,15 @@ class QuestionsController < ApplicationController
     answer_type3 = answer3["answer_type"]
     q_id3 = answer3["question_id"]
 
-    AnswerHistories.create(answer_type: answer_type1, question_id: q_id1)
-    AnswerHistories.create(answer_type: answer_type2, question_id: q_id2)
-    AnswerHistories.create(answer_type: answer_type3, question_id: q_id3)
+    AnswerHistoriy.create(answer_type: answer_type1, question_id: q_id1)
+    AnswerHistoriy.create(answer_type: answer_type2, question_id: q_id2)
+    AnswerHistoriy.create(answer_type: answer_type3, question_id: q_id3)
 
     # レコメンド
-    matches1 = Matches.where("shop_question#{q_id1} = ?", "#{answer_type1}").order("RANDOM()")
+    matches1 = Match.where("shop_question#{q_id1} = ?", "#{answer_type1}").order("RANDOM()")
     matches2 = matches1.where("shop_question#{q_id2} = ?", "#{answer_type2}").order("RANDOM()")
     matches3 = matches2.where("shop_question#{q_id3} = ?", "#{answer_type3}").order("RANDOM()")
-    not_match = Matches.all
+    not_match = Match.all
 
     if matches3.present?
       match = matches3[0]
@@ -39,7 +39,7 @@ class QuestionsController < ApplicationController
     end
 
 
-    @gnavi_id = Shops.find(match.id).gnavi_id # できたらアソシエーション使って書きたい
+    @gnavi_id = Shop.find(match.id).gnavi_id # できたらアソシエーション使って書きたい
 
     # ぐるなびAPI利用(準備)
     request_url = "http://api.gnavi.co.jp"
@@ -73,11 +73,11 @@ class QuestionsController < ApplicationController
     end
 
     # 行きたいを表示
-    action_kinds1 = Actions.where("action_kind = 1")
+    action_kinds1 = Action.where("action_kind = 1")
     @wanted_rest_infos = []
     action_kinds1.each do |action_kind1|
       wanted_shop_id = action_kind1.shop_id
-      wanted_gnavi_id = Shops.find(wanted_shop_id).gnavi_id
+      wanted_gnavi_id = Shop.find(wanted_shop_id).gnavi_id
       wanted_res = Faraday.new(:url => request_url).get("/RestSearchAPI/20150630/?keyid=6cc53ab1245c8613381303a032c68791&format=json&id=#{wanted_gnavi_id}")
 
       wanted_gnavi_info = JSON.parse(wanted_res.body)
@@ -85,11 +85,11 @@ class QuestionsController < ApplicationController
     end
 
     # 行ったを表示
-    action_kinds2 = Actions.where("action_kind = 2")
+    action_kinds2 = Action.where("action_kind = 2")
     @gone_rest_infos = []
     action_kinds2.each do |action_kind2|
       gone_shop_id = action_kind2.shop_id
-      gone_gnavi_id = Shops.find(gone_shop_id).gnavi_id
+      gone_gnavi_id = Shop.find(gone_shop_id).gnavi_id
       gone_res = Faraday.new(:url => request_url).get("/RestSearchAPI/20150630/?keyid=6cc53ab1245c8613381303a032c68791&format=json&id=#{gone_gnavi_id}")
 
       gone_gnavi_info = JSON.parse(gone_res.body)
@@ -102,12 +102,12 @@ class QuestionsController < ApplicationController
   end
 
   def want_to_go
-    Actions.create(action_kind: 1, shop_id: 2, user_id: 2) # Shops.find(match.id).id
+    Action.create(action_kind: 1, shop_id: 2, user_id: 2) # Shop.find(match.id).id
     render :action => "answer"
   end
 
   def has_gone
-    Actions.create(action_kind: 2, shop_id: 1, user_id: 1) # Shops.find(match.id).id
+    Action.create(action_kind: 2, shop_id: 1, user_id: 1) # Shop.find(match.id).id
     render :action => "answer"
   end
 

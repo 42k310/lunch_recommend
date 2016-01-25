@@ -1,4 +1,4 @@
-# AnswerHistories.create(
+# AnswerHistoriy.create(
 #   :id => 1,
 #   :answer_date => DateTime.now,
 #   :answer_type => 1,

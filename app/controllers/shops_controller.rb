@@ -2,10 +2,10 @@ class ShopsController < ApplicationController
 
   def answers
     # レコメンド
-    @match1 = Matches.where("shop_question1 = ?", 1).order("RANDOM()")
-    @match2 = Matches.where("shop_question1 = ? and shop_question2 = ?", 1, 2).order("RANDOM()")
+    @match1 = Match.where("shop_question1 = ?", 1).order("RANDOM()")
+    @match2 = Match.where("shop_question1 = ? and shop_question2 = ?", 1, 2).order("RANDOM()")
     # @match3 = @match2.where("shop_question3 = ?", 1)).order("RANDOM()")
-    # @not_match = Matches.all
+    # @not_match = Match.all
 
     p "$$$$$$$$$"
     p @match1
@@ -13,7 +13,7 @@ class ShopsController < ApplicationController
 
     p @match3
 
-    gnavi_id = Shops.find(1).gnavi_id # matchesTBLから同じq_idに対して同じa_typeを持っているshop_idを持ってくる
+    gnavi_id = Shop.find(1).gnavi_id # matchesTBLから同じq_idに対して同じa_typeを持っているshop_idを持ってくる
 
     # ぐるなびAPI利用(準備)
     request_url = "http://api.gnavi.co.jp"
