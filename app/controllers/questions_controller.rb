@@ -18,9 +18,9 @@ class QuestionsController < ApplicationController
     answer_type3 = answer3["answer_type"]
     q_id3 = answer3["question_id"]
 
-    AnswerHistoriy.create(answer_type: answer_type1, question_id: q_id1)
-    AnswerHistoriy.create(answer_type: answer_type2, question_id: q_id2)
-    AnswerHistoriy.create(answer_type: answer_type3, question_id: q_id3)
+    AnswerHistory.create(answer_type: answer_type1, question_id: q_id1)
+    AnswerHistory.create(answer_type: answer_type2, question_id: q_id2)
+    AnswerHistory.create(answer_type: answer_type3, question_id: q_id3)
 
     # レコメンド
     matches1 = Match.where("shop_question#{q_id1} = ?", "#{answer_type1}").order("RANDOM()")
