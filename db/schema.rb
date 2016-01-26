@@ -53,11 +53,14 @@ ActiveRecord::Schema.define(version: 20151225075347) do
   end
 
   create_table "shops", force: true do |t|
-    t.string   "tblg_id",    null: false
     t.string   "gnavi_id",   null: false
+    t.string   "tblg_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "shops", ["gnavi_id"], name: "unq_sp_on_gnavi_id", unique: true
+  add_index "shops", ["tblg_id"], name: "unq_sp_on_tblg_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                           default: "", null: false
