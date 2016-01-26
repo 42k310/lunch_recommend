@@ -11,56 +11,71 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115092440) do
+ActiveRecord::Schema.define(version: 20151225075347) do
 
   create_table "actions", force: true do |t|
-    t.integer  "action_kind"
+    t.integer  "user_id",     null: false
+    t.integer  "question_id", null: false
+    t.integer  "action_kind", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "shop_id"
-    t.integer  "user_id"
   end
+
+  add_index "actions", ["user_id", "question_id", "action_kind"], name: "unq_act_on_uid_qid_akd", unique: true
 
   create_table "answer_histories", force: true do |t|
-    t.date     "answer_date"
-    t.text     "answer_type"
+    t.integer  "user_id",     null: false
+    t.integer  "question_id", null: false
+    t.date     "answer_date", null: false
+    t.integer  "answer_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "question_id"
-    t.integer  "user_id"
   end
+
+  add_index "answer_histories", ["user_id", "question_id", "answer_date"], name: "unq_ans_his_on_uid_qid_adt", unique: true
 
   create_table "matches", force: true do |t|
+    t.integer  "shop_id",     null: false
+    t.integer  "question_id", null: false
+    t.integer  "answer_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "shop_question1"
-    t.integer  "shop_question2"
-    t.integer  "shop_question3"
-    t.integer  "shop_question4"
-    t.integer  "shop_question5"
-    t.integer  "shop_question6"
-    t.integer  "shop_question7"
-    t.integer  "shop_id"
   end
 
+  add_index "matches", ["shop_id", "question_id", "answer_type"], name: "unq_mtc_on_uid_qid_atp", unique: true
+
   create_table "questions", force: true do |t|
-    t.text     "title"
-    t.text     "answer1"
-    t.text     "answer2"
+    t.string   "title",      limit: 100, null: false
+    t.text     "answer1",    limit: 50,  null: false
+    t.text     "answer2",    limit: 50,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "shops", force: true do |t|
-    t.text     "gnavi_id"
+    t.string   "tblg_id",    null: false
+    t.string   "gnavi_id",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
-    t.text     "email"
+    t.string   "email",                           default: "", null: false
+    t.integer  "sign_in_count",                   default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.text     "users",              limit: 1000, default: "", null: false
+    t.string   "name",                            default: "", null: false
+    t.string   "provider",                        default: "", null: false
+    t.string   "uid",                             default: "", null: false
+    t.string   "token",                           default: "", null: false
+    t.text     "meta",               limit: 1000, default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

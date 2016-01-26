@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 # Use sqlite3 as the database for Active Record
@@ -35,18 +34,26 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
-
-gem 'pry-rails'
+# CSS
 gem 'compass-rails','~> 2.0'
 gem 'sprockets', '2.11.0'
 
-gem 'mechanize'
-
-gem 'faraday', '~> 0.9.0'
-
-gem 'config'
-
+# ユーザー認証
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+
+# 設定ファイル
+gem 'config'
+
+# APIクライアント
+gem 'faraday', '~> 0.9.0'
+
+# スクレイピング
+gem 'mechanize'
+
+# デバッグ用
+gem 'pry-rails'
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
