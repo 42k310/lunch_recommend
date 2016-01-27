@@ -15,13 +15,13 @@ ActiveRecord::Schema.define(version: 20151225075347) do
 
   create_table "actions", force: true do |t|
     t.integer  "user_id",     null: false
-    t.integer  "question_id", null: false
+    t.integer  "shop_id",     null: false
     t.integer  "action_kind", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "actions", ["user_id", "question_id", "action_kind"], name: "unq_act_on_uid_qid_akd", unique: true
+  add_index "actions", ["user_id", "shop_id", "action_kind"], name: "unq_act_on_uid_sid_akd", unique: true
 
   create_table "answer_histories", force: true do |t|
     t.integer  "user_id",     null: false
@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(version: 20151225075347) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "answer_histories", ["user_id", "question_id", "answer_date"], name: "unq_ans_his_on_uid_qid_adt", unique: true
 
   create_table "matches", force: true do |t|
     t.integer  "shop_id",     null: false

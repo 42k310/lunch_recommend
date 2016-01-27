@@ -4,6 +4,7 @@ class ShopsController < ApplicationController
   before_filter :login_required
 
   def answers
+
     # レコメンド
     @match1 = Match.where("shop_question1 = ?", 1).order("RANDOM()")
     @match2 = Match.where("shop_question1 = ? and shop_question2 = ?", 1, 2).order("RANDOM()")
@@ -48,6 +49,7 @@ class ShopsController < ApplicationController
     elements.each do |element|
       @eles << element.get_attribute("href")
     end
+
   end
 
   def next

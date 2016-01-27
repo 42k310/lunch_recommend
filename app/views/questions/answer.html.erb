@@ -40,10 +40,10 @@
         <input type="submit" value="ちがう店舗">
     <% end %>
     <%= form_tag :action => "want_to_go" do %>
-        <input type="submit" value="行きたい">
+        <input type="submit" value="<%= @want_to_go_btn_name %>">
     <% end %>
     <%= form_tag :action => "has_gone" do %>
-        <input type="submit" value="行った">
+        <input type="submit" value="<%= @has_gone_btn_name %>">
     <% end %>
 
   </div>

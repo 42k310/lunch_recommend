@@ -3,54 +3,183 @@ class QuestionsController < ApplicationController
   # 要ログイン
   before_filter :login_required
 
+  # 行きたい、行った
+  ACTION_KIND_WANT_TO_GO = 1
+  ACTION_KIND_HAS_GONE = 2
+
+  # ぐるなびAPI
+  REQUEST_URL = "http://api.gnavi.co.jp"
+
   def index
 
     # TODO: Questionが取得できない・または3件取得できなかった場合、システムエラー画面に飛ばすこと
     @questions = Question.order("RANDOM()").limit(3)
 
-
   end
 
   def answer
-    answer1 = params[:answer1]
-    answer2 = params[:answer2]
-    answer3 = params[:answer3]
-    user_id = session[:user_id] # セッションに持っているuser_idをuser_idに入れる 現在はまだログインのやつ作っていないので持っていない
 
-    answer_type1 = answer1["answer_type"]
-    q_id1 = answer1["question_id"]
-    answer_type2 = answer2["answer_type"]
-    q_id2 = answer2["question_id"]
-    answer_type3 = answer3["answer_type"]
-    q_id3 = answer3["question_id"]
+    p '---------------------------------'
+    p ' QuestionsController - answer'
+    p '---------------------------------'
 
-    AnswerHistory.create(answer_type: answer_type1, question_id: q_id1)
-    AnswerHistory.create(answer_type: answer_type2, question_id: q_id2)
-    AnswerHistory.create(answer_type: answer_type3, question_id: q_id3)
-
-    # レコメンド
-    matches1 = Match.where("shop_question#{q_id1} = ?", "#{answer_type1}").order("RANDOM()")
-    matches2 = matches1.where("shop_question#{q_id2} = ?", "#{answer_type2}").order("RANDOM()")
-    matches3 = matches2.where("shop_question#{q_id3} = ?", "#{answer_type3}").order("RANDOM()")
-    not_match = Match.all
-
-    if matches3.present?
-      match = matches3[0]
-    elsif matches2.present?
-      match = matches2[0]
-    elsif matches1.present?
-      match = matches1[0]
-    else
-      match = not_match[0]
+    # セッションから店舗情報を取得
+    @shop = nil
+    if session[:shop_id].present?
+      @shop = Shop.find_by(id: session[:shop_id])
     end
 
+    # ----------------------------------------------
+    #  店舗情報が未設定の場合、リコメンド処理を実施
+    # ----------------------------------------------
 
-    @gnavi_id = Shop.find(match.id).gnavi_id # できたらアソシエーション使って書きたい
+    if @shop.blank?
+
+      # 回答情報をパラメータから取得
+      answer1 = params[:answer1]
+      answer2 = params[:answer2]
+      answer3 = params[:answer3]
+
+      answer_type1 = answer1["answer_type"]
+      q_id1 = answer1["question_id"]
+      answer_type2 = answer2["answer_type"]
+      q_id2 = answer2["question_id"]
+      answer_type3 = answer3["answer_type"]
+      q_id3 = answer3["question_id"]
+
+      # 回答履歴を保存
+      AnswerHistory.create(user_id: current_user.id, answer_type: answer_type1, question_id: q_id1, answer_date: DateTime.now)
+      AnswerHistory.create(user_id: current_user.id, answer_type: answer_type2, question_id: q_id2, answer_date: DateTime.now)
+      AnswerHistory.create(user_id: current_user.id, answer_type: answer_type3, question_id: q_id3, answer_date: DateTime.now)
+
+      # レコメンド
+      matches1 = Match.where(question_id: q_id1, answer_type: answer_type1).order("RANDOM()")
+      matches2 = matches1.where(question_id: q_id2, answer_type: answer_type2).order("RANDOM()")
+      matches3 = matches2.where(question_id: q_id3, answer_type: answer_type3).order("RANDOM()")
+
+      not_match = Match.all
+
+      if matches3.present?
+        match = matches3[0]
+      elsif matches2.present?
+        match = matches2[0]
+      elsif matches1.present?
+        match = matches1[0]
+      else
+        match = not_match[0]
+      end
+
+      # 店舗情報を取得
+      @shop = Shop.find_by(id: match.shop.id)
+
+      # セッションに店舗IDを格納
+      session[:shop_id] = @shop.id
+
+    end
+
+    # アクションとボタン名の準備
+    prepare_action
+    prepare_btn_name
+
+    # 店舗情報を準備
+    prepare_shop_info
+
+    # 行った・行きたい情報を準備
+    prepare_want_to_go
+    prepare_has_gone
+
+  end
+
+  def next
+    render :action => "answer"
+  end
+
+  def want_to_go
+
+    p '---------------------------------'
+    p ' QuestionsController - want_to_go'
+    p '---------------------------------'
+
+    # 店舗情報を取得
+    shop_id = session[:shop_id]
+    @shop = Shop.find_by(id: shop_id)
+
+    # --------------------------------
+    # 行ったのアクションを登録・削除
+    # --------------------------------
+
+    # アクションの準備
+    prepare_action
+
+    if @action_want.blank?
+      # 存在しない場合は新規登録
+      @action_want = Action.create(action_kind: ACTION_KIND_WANT_TO_GO, shop_id: shop_id.to_i, user_id: current_user.id)
+    else
+      # 存在した場合は削除
+      @action_want.destroy
+    end
+
+    # ボタン名の準備
+    prepare_btn_name
+
+    # 店舗情報を準備
+    prepare_shop_info
+
+    # 行った・行きたい情報を準備
+    prepare_want_to_go
+    prepare_has_gone
+
+    # 店舗紹介画面を描画
+    render :action => "answer"
+
+  end
+
+  def has_gone
+
+    p '---------------------------------'
+    p ' QuestionsController - has_gone'
+    p '---------------------------------'
+
+    # 店舗情報を取得
+    shop_id = session[:shop_id]
+    @shop = Shop.find_by(id: shop_id)
+
+    # --------------------------------
+    # 行ったのアクションを登録・削除
+    # --------------------------------
+
+    # アクションの準備
+    prepare_action
+
+    if @action_gone.blank?
+      # 存在しない場合は新規登録
+      @action_gone = Action.create(action_kind: ACTION_KIND_HAS_GONE, shop_id: shop_id.to_i, user_id: current_user.id)
+    else
+      # 存在した場合は削除
+      @action_gone.destroy
+    end
+
+    # ボタン名の準備
+    prepare_btn_name
+
+    # 店舗情報を準備
+    prepare_shop_info
+    # 行った・行きたい情報を準備
+    prepare_want_to_go
+    prepare_has_gone
+
+    # 店舗紹介画面を描画
+    render :action => "answer"
+
+  end
+
+  private
+
+  def prepare_shop_info()
 
     # ぐるなびAPI利用(準備)
-    request_url = "http://api.gnavi.co.jp"
-    id = @gnavi_id
-    res = Faraday.new(:url => request_url).get("/RestSearchAPI/20150630/?keyid=6cc53ab1245c8613381303a032c68791&format=json&id=#{id}")
+    gnavi_id = @shop.gnavi_id
+    res = Faraday.new(:url => REQUEST_URL).get("/RestSearchAPI/20150630/?keyid=6cc53ab1245c8613381303a032c68791&format=json&id=#{gnavi_id}")
 
     @gnavi_info = JSON.parse(res.body)
     @rest_info = @gnavi_info["rest"]
@@ -78,44 +207,50 @@ class QuestionsController < ApplicationController
       @eles << element.get_attribute("href")
     end
 
-    # 行きたいを表示
-    action_kinds1 = Action.where("action_kind = 1")
+  end
+
+  # 行きたいを表示
+  def prepare_want_to_go
+
+    action_kinds1 = Action.where(action_kind: ACTION_KIND_WANT_TO_GO, user_id: current_user.id)
     @wanted_rest_infos = []
     action_kinds1.each do |action_kind1|
       wanted_shop_id = action_kind1.shop_id
       wanted_gnavi_id = Shop.find(wanted_shop_id).gnavi_id
-      wanted_res = Faraday.new(:url => request_url).get("/RestSearchAPI/20150630/?keyid=6cc53ab1245c8613381303a032c68791&format=json&id=#{wanted_gnavi_id}")
+      wanted_res = Faraday.new(:url => REQUEST_URL).get("/RestSearchAPI/20150630/?keyid=6cc53ab1245c8613381303a032c68791&format=json&id=#{wanted_gnavi_id}")
 
       wanted_gnavi_info = JSON.parse(wanted_res.body)
       @wanted_rest_infos << wanted_gnavi_info["rest"]
     end
 
-    # 行ったを表示
-    action_kinds2 = Action.where("action_kind = 2")
+  end
+
+  # 行ったを表示
+  def prepare_has_gone
+
+    action_kinds2 = Action.where(action_kind: ACTION_KIND_HAS_GONE, user_id: current_user.id)
     @gone_rest_infos = []
     action_kinds2.each do |action_kind2|
       gone_shop_id = action_kind2.shop_id
       gone_gnavi_id = Shop.find(gone_shop_id).gnavi_id
-      gone_res = Faraday.new(:url => request_url).get("/RestSearchAPI/20150630/?keyid=6cc53ab1245c8613381303a032c68791&format=json&id=#{gone_gnavi_id}")
+      gone_res = Faraday.new(:url => REQUEST_URL).get("/RestSearchAPI/20150630/?keyid=6cc53ab1245c8613381303a032c68791&format=json&id=#{gone_gnavi_id}")
 
       gone_gnavi_info = JSON.parse(gone_res.body)
       @gone_rest_infos << gone_gnavi_info["rest"]
     end
+
   end
 
-  def next
-    render :action => "answer"
+  # アクションの取得
+  def prepare_action
+    @action_want = Action.where(action_kind: ACTION_KIND_WANT_TO_GO, shop_id: @shop.id, user_id: current_user.id).first
+    @action_gone = Action.where(action_kind: ACTION_KIND_HAS_GONE, shop_id: @shop.id, user_id: current_user.id).first
   end
 
-  def want_to_go
-    Action.create(action_kind: 1, shop_id: 2, user_id: 2) # Shop.find(match.id).id
-    render :action => "answer"
+  # ボタン表示名
+  def prepare_btn_name
+    @want_to_go_btn_name = @action_want.present? ?  "行きたいを取り消す" : "行きたい"
+    @has_gone_btn_name = @action_gone.present? ?  "行ったを取り消す" : "行った"
   end
-
-  def has_gone
-    Action.create(action_kind: 2, shop_id: 1, user_id: 1) # Shop.find(match.id).id
-    render :action => "answer"
-  end
-
 
 end

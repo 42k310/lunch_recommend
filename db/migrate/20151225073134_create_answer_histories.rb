@@ -12,8 +12,5 @@ class CreateAnswerHistories < ActiveRecord::Migration
 
     end
 
-    # ユーザーID、質問ID、回答日時の組み合わせでユニーク制約を付与
-    add_index :answer_histories, [:user_id, :question_id, :answer_date], unique: true, name: "unq_ans_his_on_uid_qid_adt"
-
   end
 end
