@@ -13,13 +13,13 @@ class ApplicationController < ActionController::Base
   # @return [User] ユーザー情報
   def login_required
 
-    if session[:user_id].blank?
+    if session[:uid].blank?
       # セッション情報が無い場合はログインページへリダイレクト
       redirect_to signin_path and return
     end
 
     # ユーザー情報取得
-    @current_user = User.find_by(id: session[:user_id])
+    @current_user = User.find_by(uid: session[:uid])
 
     if @current_user.blank?
       # ユーザー情報が取得できなかった場合はログインページへリダイレクト
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
 
   ## ユーザー情報取得
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.find_by(uid: session[:uid]) if session[:uid]
   end
 
 end

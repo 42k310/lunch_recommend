@@ -41,16 +41,14 @@ class SessionsController < ApplicationController
     p "auth.uid: #{auth.uid}"
     p "auth.credentials.token: #{auth.credentials.token}"
     p "auth.provider: #{auth.provider}"
-
     p "-----------------------------"
-
 
     # ユーザー情報取得（存在しない場合は新規作成して取得）
     user = User.find_or_create_user(auth)
 
     if user.present?
       # ユーザーIDをセッション情報に格納
-      session[:user_id] = user.id
+      session[:uid] = user.uid
       # ユーザー情報取得に成功した場合は質問画面へ
       redirect_to questions_path
     else
