@@ -1,5 +1,8 @@
 class ShopsController < ApplicationController
 
+  # 要ログイン
+  before_filter :login_required
+
   def answers
     # レコメンド
     @match1 = Match.where("shop_question1 = ?", 1).order("RANDOM()")

@@ -1,14 +1,25 @@
 Rails.application.routes.draw do
 
-  # デバイスの設定
-  devise_for :users
-
   # ------------
   # トップ
   # ------------
 
   # 質問画面へ飛ばす
   root :to => "questions#index"
+
+  # ------------
+  # 認証
+  # ------------
+
+  # サインイン
+  get "/signin" => "sessions#show"
+  get "/signout" => "sessions#destroy"
+
+  # コールバック
+  get  '/auth/:provider/callback' => 'sessions#callback'
+  post '/auth/:provider/callback'  => 'sessions#callback'
+  # 認証失敗
+  get  '/auth/failure' => 'sessions#failure'
 
   # ------------
   # 質問・回答
@@ -32,14 +43,5 @@ Rails.application.routes.draw do
   # 行った
   post "has_gone" => "questions#has_gone"
   get "has_gone" => "questions#has_gone"
-
-  # -------------------
-  # OAuth2 for Google
-  # -------------------
-
-  get  '/auth/:provider/callback' => 'sessions#callback'
-  post '/auth/:provider/callback'  => 'sessions#callback'
-  get  '/auth/failure' => 'sessions#failure'
-  get  '/logout' => 'sessions#destroy'
 
 end

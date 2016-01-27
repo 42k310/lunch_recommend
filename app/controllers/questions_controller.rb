@@ -1,8 +1,14 @@
 class QuestionsController < ApplicationController
 
+  # 要ログイン
+  before_filter :login_required
+
   def index
+
+    # TODO: Questionが取得できない・または3件取得できなかった場合、システムエラー画面に飛ばすこと
     @questions = Question.order("RANDOM()").limit(3)
-    p @questions
+
+
   end
 
   def answer
@@ -110,5 +116,6 @@ class QuestionsController < ApplicationController
     Action.create(action_kind: 2, shop_id: 1, user_id: 1) # Shop.find(match.id).id
     render :action => "answer"
   end
+
 
 end

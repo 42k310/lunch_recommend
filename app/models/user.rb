@@ -1,11 +1,8 @@
 class User < ActiveRecord::Base
 
-  # OAuth認証、トラック
-  devise :trackable, :omniauthable
-
   protected
 
-  def self.find_for_google(auth)
+  def self.find_or_create_user(auth)
 
     # メールアドレスからユーザー情報を検索
     user = User.find_by(email: auth.info.email)
@@ -14,12 +11,16 @@ class User < ActiveRecord::Base
     unless user
       # 新規ユーザー登録
       user = User.create(
-        name: auth.info.name,
         email:  auth.info.email,
-        provider: auth.provider,
+        name: auth.info.name,
+        first_name: auth.info.first_name,
+        last_name: auth.info.last_name,
+        gender:auth.extra.raw_info.gender,
+        image: auth.info.image,
         uid: auth.uid,
         token: auth.credentials.token,
-        meta: auth.to_yaml)
+        provider: auth.provider
+      )
     end
 
     # ユーザー情報を返却

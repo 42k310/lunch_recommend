@@ -39,7 +39,6 @@ gem 'compass-rails','~> 2.0'
 gem 'sprockets', '2.11.0'
 
 # ユーザー認証
-gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
@@ -47,7 +46,7 @@ gem 'omniauth-google-oauth2'
 gem 'config'
 
 # APIクライアント
-gem 'faraday', '~> 0.9.0'
+gem 'faraday'
 
 # スクレイピング
 gem 'mechanize'

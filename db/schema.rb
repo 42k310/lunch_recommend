@@ -63,18 +63,15 @@ ActiveRecord::Schema.define(version: 20151225075347) do
   add_index "shops", ["tblg_id"], name: "unq_sp_on_tblg_id", unique: true
 
   create_table "users", force: true do |t|
-    t.string   "email",                           default: "", null: false
-    t.integer  "sign_in_count",                   default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.text     "users",              limit: 1000, default: "", null: false
-    t.string   "name",                            default: "", null: false
-    t.string   "provider",                        default: "", null: false
-    t.string   "uid",                             default: "", null: false
-    t.string   "token",                           default: "", null: false
-    t.text     "meta",               limit: 1000, default: "", null: false
+    t.string   "email",      default: "", null: false
+    t.string   "name",       default: "", null: false
+    t.string   "first_name", default: "", null: false
+    t.string   "last_name",  default: "", null: false
+    t.string   "gender",     default: "", null: false
+    t.string   "image",      default: "", null: false
+    t.string   "uid",        default: "", null: false
+    t.string   "token",      default: "", null: false
+    t.string   "provider",   default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

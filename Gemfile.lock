@@ -29,7 +29,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     arel (5.0.1.20140414130214)
-    bcrypt (3.1.10-x64-mingw32)
     builder (3.2.2)
     chunky_png (1.3.5)
     coderay (1.1.0)
@@ -50,13 +49,6 @@ GEM
       activesupport (>= 3.0)
       deep_merge (~> 1.0.0)
     deep_merge (1.0.1)
-    devise (3.5.5)
-      bcrypt (~> 3.0)
-      orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
-      responders
-      thread_safe (~> 0.1)
-      warden (~> 1.2.3)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
@@ -119,7 +111,6 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    orm_adapter (0.5.0)
     polyglot (0.3.5)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -148,8 +139,6 @@ GEM
     rake (10.5.0)
     rdoc (4.2.1)
       json (~> 1.4)
-    responders (1.1.2)
-      railties (>= 3.2, < 4.2)
     sass (3.2.0)
     sass-rails (4.0.2)
       railties (>= 4.0.0, < 5.0)
@@ -188,8 +177,6 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1-x64-mingw32)
-    warden (1.2.4)
-      rack (>= 1.0)
     webrobots (0.1.2)
 
 PLATFORMS
@@ -199,8 +186,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   compass-rails (~> 2.0)
   config
-  devise
-  faraday (~> 0.9.0)
+  faraday
   jbuilder (~> 2.0)
   jquery-rails
   mechanize
