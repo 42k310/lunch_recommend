@@ -78,8 +78,10 @@ class QuestionsController < ApplicationController
     end
 
     # アクションとボタン名の準備
-    prepare_action
-    prepare_btn_name
+    actions = get_actions(shop_id, current_user.id)
+    @action_want = actions[:action_want]
+    @action_gone = actions[:action_gone]
+    prepare_btn_name(@action_want, @action_gone)
 
     # 店舗情報を準備
     prepare_shop_info
@@ -109,7 +111,9 @@ class QuestionsController < ApplicationController
     # --------------------------------
 
     # アクションの準備
-    prepare_action
+    actions = get_actions(shop_id, current_user.id)
+    @action_want = actions[:action_want]
+    @action_gone = actions[:action_gone]
 
     if @action_want.blank?
       # 存在しない場合は新規登録
@@ -117,10 +121,11 @@ class QuestionsController < ApplicationController
     else
       # 存在した場合は削除
       @action_want.destroy
+      @action_want = nil
     end
 
     # ボタン名の準備
-    prepare_btn_name
+    prepare_btn_name(@action_want, @action_gone)
 
     # 店舗情報を準備
     prepare_shop_info
@@ -149,7 +154,9 @@ class QuestionsController < ApplicationController
     # --------------------------------
 
     # アクションの準備
-    prepare_action
+    actions = get_actions(shop_id, current_user.id)
+    @action_want = actions[:action_want]
+    @action_gone = actions[:action_gone]
 
     if @action_gone.blank?
       # 存在しない場合は新規登録
@@ -157,10 +164,11 @@ class QuestionsController < ApplicationController
     else
       # 存在した場合は削除
       @action_gone.destroy
+      @action_gone = nil
     end
 
     # ボタン名の準備
-    prepare_btn_name
+    prepare_btn_name(@action_want, @action_gone)
 
     # 店舗情報を準備
     prepare_shop_info
@@ -242,15 +250,17 @@ class QuestionsController < ApplicationController
   end
 
   # アクションの取得
-  def prepare_action
-    @action_want = Action.where(action_kind: ACTION_KIND_WANT_TO_GO, shop_id: @shop.id, user_id: current_user.id).first
-    @action_gone = Action.where(action_kind: ACTION_KIND_HAS_GONE, shop_id: @shop.id, user_id: current_user.id).first
+  def get_actions(shop_id, user_id)
+    action_want = Action.where(action_kind: ACTION_KIND_WANT_TO_GO, shop_id: shop_id, user_id: user_id).first
+    action_gone = Action.where(action_kind: ACTION_KIND_HAS_GONE, shop_id: shop_id, user_id: user_id).first
+    # アクションを返却
+    {action_want: action_want, action_gone: action_gone}
   end
 
   # ボタン表示名
-  def prepare_btn_name
-    @want_to_go_btn_name = @action_want.present? ?  "行きたいを取り消す" : "行きたい"
-    @has_gone_btn_name = @action_gone.present? ?  "行ったを取り消す" : "行った"
+  def prepare_btn_name(action_want, action_gone)
+    @want_to_go_btn_name = action_want.present? ?  "行きたいを取り消す" : "行きたい"
+    @has_gone_btn_name = action_gone.present? ?  "行ったを取り消す" : "行った"
   end
 
 end
