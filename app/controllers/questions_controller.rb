@@ -23,6 +23,26 @@ class QuestionsController < ApplicationController
     p ' QuestionsController - answer'
     p '---------------------------------'
 
+    # 回答情報をパラメータから取得
+    answer1 = params[:answer1]
+    answer2 = params[:answer2]
+    answer3 = params[:answer3]
+
+    answer_type1 = answer1["answer_type"]
+    q_id1 = answer1["question_id"]
+    answer_type2 = answer2["answer_type"]
+    q_id2 = answer2["question_id"]
+    answer_type3 = answer3["answer_type"]
+    q_id3 = answer3["question_id"]
+
+    # セッションに質問と回答を保存（matchメソッドで使用）
+    session[:question1] = q_id1
+    session[:answer1] = answer1["answer_type"]
+    session[:question2] = q_id2
+    session[:answer2] = answer2["answer_type"]
+    session[:question3] = q_id3
+    session[:answer3] = answer3["answer_type"]
+
     # セッションから店舗情報を取得
     @shop = nil
     if session[:shop_id].present?
@@ -34,47 +54,19 @@ class QuestionsController < ApplicationController
     # ----------------------------------------------
 
     if @shop.blank?
-
-      # 回答情報をパラメータから取得
-      answer1 = params[:answer1]
-      answer2 = params[:answer2]
-      answer3 = params[:answer3]
-
-      answer_type1 = answer1["answer_type"]
-      q_id1 = answer1["question_id"]
-      answer_type2 = answer2["answer_type"]
-      q_id2 = answer2["question_id"]
-      answer_type3 = answer3["answer_type"]
-      q_id3 = answer3["question_id"]
-
       # 回答履歴を保存
       AnswerHistory.create(user_id: current_user.id, answer_type: answer_type1, question_id: q_id1, answer_date: DateTime.now)
       AnswerHistory.create(user_id: current_user.id, answer_type: answer_type2, question_id: q_id2, answer_date: DateTime.now)
       AnswerHistory.create(user_id: current_user.id, answer_type: answer_type3, question_id: q_id3, answer_date: DateTime.now)
 
-      # レコメンド
-      matches1 = Match.where(question_id: q_id1, answer_type: answer_type1).order("RANDOM()")
-      matches2 = matches1.where(question_id: q_id2, answer_type: answer_type2).order("RANDOM()")
-      matches3 = matches2.where(question_id: q_id3, answer_type: answer_type3).order("RANDOM()")
-
-      not_match = Match.all
-
-      if matches3.present?
-        match = matches3[0]
-      elsif matches2.present?
-        match = matches2[0]
-      elsif matches1.present?
-        match = matches1[0]
-      else
-        match = not_match[0]
-      end
+      # 回答とマッチしているショップを配列として取得
+      matches
 
       # 店舗情報を取得
-      @shop = Shop.find_by(id: match.shop.id)
+      @shop = Shop.find_by(id: session[:displayed_shop_ids][0])
 
       # セッションに店舗IDを格納
       session[:shop_id] = @shop.id
-
     end
 
     # アクションとボタン名の準備
@@ -90,7 +82,26 @@ class QuestionsController < ApplicationController
 
   end
 
+  # 「ちがう店舗」をレコメンド
   def next
+    p '---------------------------------'
+    p ' QuestionsController - next'
+    p '---------------------------------'
+
+    # セッションから店舗情報を取得
+    @shop = nil
+
+    # スクレイピング
+    scraping
+
+    # 回答とマッチした店舗を配列として取得→0番目の要素をmatchに格納
+    matches
+
+    # 店舗情報を取得
+    @shop = Shop.find_by(id: session[:match])
+
+    # 店舗のぐるなび情報を取得
+    prepare_shop_info()
     render :action => "answer"
   end
 
@@ -198,14 +209,7 @@ class QuestionsController < ApplicationController
     @longitude = @rest_info["longitude"].to_f - @rest_info["latitude"].to_f * 0.000046038 - @rest_info["longitude"].to_f * 0.000083043 + 0.010040
 
     # スクレイピング
-    agent = Mechanize.new
-    page = agent.get("http://tabelog.com/tokyo/A1301/A130101/13138373/")
-    elements = page.search('.rstdtl-top-photo__photo a')
-
-    @eles = []
-    elements.each do |element|
-      @eles << element.get_attribute("href")
-    end
+    scraping
 
   end
 
@@ -251,6 +255,86 @@ class QuestionsController < ApplicationController
   def prepare_btn_name
     @want_to_go_btn_name = @action_want.present? ?  "行きたいを取り消す" : "行きたい"
     @has_gone_btn_name = @action_gone.present? ?  "行ったを取り消す" : "行った"
+  end
+
+  # 回答とマッチしているショップを配列として取得する
+  def matches
+    p '---------------------------------'
+    p ' QuestionsController - matches'
+    p '---------------------------------'
+
+    matches1 = Match.where(question_id: session[:question1], answer_type: session[:answer1]).order("RANDOM()")
+    matches2 = Match.where(question_id: session[:question2], answer_type: session[:answer2]).order("RANDOM()")
+    matches3 = Match.where(question_id: session[:question3], answer_type: session[:answer3]).order("RANDOM()")
+    not_matches = Match.all
+
+    # shop_idのみを抜き出す
+    match1_ids = []
+    matches1.each do |match1|
+      match1_ids << match1.shop_id
+    end
+
+    match2_ids = []
+    matches2.each do |match2|
+      match2_ids << match2.shop_id
+    end
+
+    match3_ids = []
+    matches3.each do |match3|
+      match3_ids << match3.shop_id
+    end
+
+    not_match_ids = []
+    not_matches.each do |not_match|
+      not_match_ids << not_match.shop_id
+    end
+
+    # match強度毎にshop_idを保持する
+    matches_strength_0 = not_match_ids
+    matches_strength_1 = match1_ids | match2_ids | match3_ids
+    matches_strength_2 = (match1_ids & match2_ids) | (match2_ids & match3_ids)
+    matches_strength_3 = match1_ids & match2_ids & match3_ids
+
+    # 保持したshop_idから、以前表示したものを除去
+    if session[:displayed_shop_ids].present?
+      matches_strength_3 = matches_strength_3 - session[:displayed_shop_ids]
+      matches_strength_2 = matches_strength_2 - session[:displayed_shop_ids]
+      matches_strength_1 = matches_strength_1 - session[:displayed_shop_ids]
+      matches_strength_0 = matches_strength_0 - session[:displayed_shop_ids]
+    end
+
+    if matches_strength_3.present?
+      session[:match] = matches_strength_3[0]
+    elsif matches_strength_2.present?
+      session[:match] = matches_strength_2[0]
+    elsif matches_strength_1.present?
+      session[:match] = matches_strength_1[0]
+    elsif matches_strength_0.present?
+      session[:match] = matches_strength_0[0]
+      # TODO: not_matchが空になったらエラー画面？に飛ばす
+    # else
+    #   redirect_to :action => "error"
+    end
+
+    # 表示済の店舗IDを保持する
+    if session[:displayed_shop_ids].present?
+      session[:displayed_shop_ids] << session[:match]
+    else
+      session[:displayed_shop_ids] = [session[:match]]
+    end
+
+  end
+
+  # スクレイピング（from 食べログ）
+  def scraping
+    agent = Mechanize.new
+    page = agent.get("http://tabelog.com/tokyo/A1301/A130101/13138373/") # TODO: 食べログIDとぐるなびIDを対応させる
+    elements = page.search('.rstdtl-top-photo__photo a')
+
+    @eles = []
+    elements.each do |element|
+      @eles << element.get_attribute("href")
+    end
   end
 
 end
