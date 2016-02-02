@@ -91,11 +91,11 @@ class QuestionsController < ApplicationController
     # セッションから店舗情報を取得
     @shop = nil
 
-    # スクレイピング
-    scraping
-
     # 回答とマッチした店舗を配列として取得→0番目の要素をmatchに格納
     matches
+
+    # スクレイピング
+    scraping
 
     # 店舗情報を取得
     @shop = Shop.find_by(id: session[:match])
@@ -204,6 +204,7 @@ class QuestionsController < ApplicationController
     @station = @rest_info["access"]["station"]
     @walk = @rest_info["access"]["walk"]
     @no_smoking = @rest_info["no_smoking"]
+    # @private_room = @rest_info["private_room"]
 
     @latitude = @rest_info["latitude"].to_f - @rest_info["latitude"].to_f * 0.00010695 + @rest_info["longitude"].to_f * 0.000017464 + 0.0046017
     @longitude = @rest_info["longitude"].to_f - @rest_info["latitude"].to_f * 0.000046038 - @rest_info["longitude"].to_f * 0.000083043 + 0.010040
@@ -323,18 +324,37 @@ class QuestionsController < ApplicationController
       session[:displayed_shop_ids] = [session[:match]]
     end
 
+    # session[:shop_id]を更新
+    session[:shop_id] = session[:match]
+
   end
 
   # スクレイピング（from 食べログ）
   def scraping
+    tblg_id = Shop.find(session[:shop_id]).tblg_id
+
     agent = Mechanize.new
-    page = agent.get("http://tabelog.com/tokyo/A1301/A130101/13138373/") # TODO: 食べログIDとぐるなびIDを対応させる
-    elements = page.search('.rstdtl-top-photo__photo a')
+    page = agent.get("http://tabelog.com/tokyo/#{tblg_id}dtlphotolst/1/smp2/")
+    elements = page.search('.thum-photobox__img a')
 
     @eles = []
     elements.each do |element|
       @eles << element.get_attribute("href")
     end
   end
+
+  # # TODO: 個室、喫煙はAPIのリクエストにないため、メソッドをつくる（途中）
+  # agent1 = Mechanize.new
+  # page1 = agent1.get("http://r.gnavi.co.jp/#{session[:shop_id]}")
+  # elements1 = page1.search('#nav-main li')
+  #
+  # elements1.each do |element|
+  #   pri = element.inner_text
+  #   if pri.include?("個室")
+  #     @private_room = "個室あり"
+  #     p "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  #     p @private_room
+  #   end
+  # end
 
 end
