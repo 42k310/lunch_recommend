@@ -44,4 +44,7 @@ Rails.application.routes.draw do
   post "has_gone" => "questions#has_gone"
   get "has_gone" => "questions#has_gone"
 
+  get "error" => "questions#error"
+  post "error" => "questions#error"
+
 end
