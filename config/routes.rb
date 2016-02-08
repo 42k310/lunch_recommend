@@ -44,7 +44,12 @@ Rails.application.routes.draw do
   post "has_gone" => "questions#has_gone"
   get "has_gone" => "questions#has_gone"
 
-  get "error" => "questions#error"
-  post "error" => "questions#error"
+  # レコメンドする店舗がないとき
+  get "error" => "questions#nothing"
+  post "error" => "questions#nothing"
+
+  # 最初からやり直す
+  get "retry" => "questions#retry"
+  post "retry" => "questions#retry"
 
 end

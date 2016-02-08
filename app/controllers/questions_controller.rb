@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
 
+  # TODO: お気に入り店舗の登録（want程度の優先度）
   # 要ログイン
   before_filter :login_required
 
@@ -12,10 +13,20 @@ class QuestionsController < ApplicationController
 
   def index
 
-    # TODO: Questionが取得できない・または3件取得できなかった場合、システムエラー画面に飛ばすこと
+    # TODO: Questionが取得できない・または3件取得できなかった場合、システムエラー画面に飛ばすこと（※要確認）
     @questions = Question.order("RANDOM()").limit(3)
 
+    # @questionsの中身が存在し、その数が３つなら通常通り処理、そうでないならシステムエラー画面に飛ばす
+    if @questions.present?
+      if @questions.count == 3
+        render :action => "index"
+      end
+    else
+      render :action => "nothing"
+    end
+
   end
+
 
   def answer
 
@@ -76,6 +87,9 @@ class QuestionsController < ApplicationController
     # 店舗情報を準備
     prepare_shop_info
 
+    # スクレイピング
+    scraping
+
     # 行った・行きたい情報を準備
     prepare_want_to_go
     prepare_has_gone
@@ -94,15 +108,21 @@ class QuestionsController < ApplicationController
     # 回答とマッチした店舗を配列として取得→0番目の要素をmatchに格納
     matches
 
-    # スクレイピング
-    scraping
+    # session[:match]の中身があれば、ぐるなびIDをとってきて店舗情報を描画する（なければ「ない画面」に飛ばす）
+    if session[:match].present?
+      # スクレイピング
+      scraping
 
-    # 店舗情報を取得
-    @shop = Shop.find_by(id: session[:match])
+      # 店舗情報を取得
+      @shop = Shop.find_by(id: session[:match])
 
-    # 店舗のぐるなび情報を取得
-    prepare_shop_info()
-    render :action => "answer"
+      # 店舗のぐるなび情報を取得
+      prepare_shop_info()
+
+      render :action =>  "answer" and return
+    else
+      render :action => "nothing" and return
+    end
   end
 
   def want_to_go
@@ -184,6 +204,16 @@ class QuestionsController < ApplicationController
 
   end
 
+  # nothingののち、はじめからやり直す
+  # TODO :再度ログインからやり直さずに質問画面から再開するには？
+  def retry
+    session.clear
+    redirect_to :action => "index"
+  end
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # ここからprivate
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━
   private
 
   def prepare_shop_info()
@@ -209,8 +239,8 @@ class QuestionsController < ApplicationController
     @latitude = @rest_info["latitude"].to_f - @rest_info["latitude"].to_f * 0.00010695 + @rest_info["longitude"].to_f * 0.000017464 + 0.0046017
     @longitude = @rest_info["longitude"].to_f - @rest_info["latitude"].to_f * 0.000046038 - @rest_info["longitude"].to_f * 0.000083043 + 0.010040
 
-    # スクレイピング
-    scraping
+    # 個室情報・喫煙情報を取得
+    api_extention
 
   end
 
@@ -291,7 +321,7 @@ class QuestionsController < ApplicationController
     end
 
     # match強度毎にshop_idを保持する
-    matches_strength_0 = not_match_ids
+    matches_strength_0 = not_match_ids.uniq
     matches_strength_1 = match1_ids | match2_ids | match3_ids
     matches_strength_2 = (match1_ids & match2_ids) | (match2_ids & match3_ids)
     matches_strength_3 = match1_ids & match2_ids & match3_ids
@@ -304,6 +334,14 @@ class QuestionsController < ApplicationController
       matches_strength_0 = matches_strength_0 - session[:displayed_shop_ids]
     end
 
+    p '---------------------------------'
+    p 'デバッグ用（※match強度に応じた配列の中身を表示）'
+    p "matches_strength_3 => #{matches_strength_3}"
+    p "matches_strength_2 => #{matches_strength_2}"
+    p "matches_strength_1 => #{matches_strength_1}"
+    p "matches_strength_0 => #{matches_strength_0}"
+    p '---------------------------------'
+
     if matches_strength_3.present?
       session[:match] = matches_strength_3[0]
     elsif matches_strength_2.present?
@@ -312,9 +350,9 @@ class QuestionsController < ApplicationController
       session[:match] = matches_strength_1[0]
     elsif matches_strength_0.present?
       session[:match] = matches_strength_0[0]
-      # TODO: not_matchが空になったらエラー画面？に飛ばす
-    # else
-    #   redirect_to :action => "error"
+    else
+      # 対象店舗がなくなったら、session[:match]をnilにする
+      session[:match] = nil
     end
 
     # 表示済の店舗IDを保持する
@@ -343,18 +381,44 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # # TODO: 個室、喫煙はAPIのリクエストにないため、メソッドをつくる（途中）
-  # agent1 = Mechanize.new
-  # page1 = agent1.get("http://r.gnavi.co.jp/#{session[:shop_id]}")
-  # elements1 = page1.search('#nav-main li')
-  #
-  # elements1.each do |element|
-  #   pri = element.inner_text
-  #   if pri.include?("個室")
-  #     @private_room = "個室あり"
-  #     p "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-  #     p @private_room
-  #   end
-  # end
+  # 個室情報・喫煙情報を取得（スクレイピング）
+  def api_extention
+    p '---------------------------------'
+    p 'api_extention'
+    p '---------------------------------'
+
+    agent1 = Mechanize.new
+    page1 = agent1.get("http://r.gnavi.co.jp/#{Shop.find(session[:shop_id]).gnavi_id}")
+    elements_private_room = page1.search('#nav-main li')
+    elements_smoking = page1.search('#info-table-seat table ul li')
+
+    # 個室情報
+    elements_private_room.each do |element_private_room|
+      private_room = element_private_room.inner_text
+      p "-----------------------------"
+      p private_room
+      p private_room.include?("個室")
+
+      if private_room.include?("個室")
+        @private_room = "個室あり"
+      end
+    end
+
+    # 喫煙情報
+    elements_smoking.each do |element_smoking|
+      smoking = element_smoking.inner_text
+      p "-----------------------------"
+      p smoking
+      p smoking.include?("喫煙可")
+
+      if smoking.include?("喫煙可")
+        @smoking = "喫煙可"
+        break
+      else
+        @smoking = "禁煙"
+      end
+    end
+
+  end
 
 end

@@ -35,7 +35,10 @@
 
     <p><%= @station %>から徒歩<%= @walk %>分</p>
 
-    <p><%= @no_smoking %></p>
+    <p><%= @smoking %></p>
+
+    <p><%= @private_room %></p>
+
     <%= form_tag :action => "next" do %>
         <input type="submit" value="ちがう店舗">
     <% end %>
@@ -52,7 +55,7 @@
 <div class="middle_content">
   <div class="food_pic">
     <ul>
-      <% @eles.first(2).each do |ele| %> <!-- first(2)は回数制限なので消してもOK -->
+      <% @eles.each do |ele| %>
           <li><img src="<%= ele %>"></li>
       <% end %>
     </ul>
