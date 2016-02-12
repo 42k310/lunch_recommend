@@ -94,6 +94,11 @@ class QuestionsController < ApplicationController
     prepare_want_to_go
     prepare_has_gone
 
+    p '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    p 'answerにおけるセッション'
+    p session[:shop_id]
+    p '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+
   end
 
   # 「ちがう店舗」をレコメンド
@@ -150,6 +155,9 @@ class QuestionsController < ApplicationController
       @action_want.destroy
     end
 
+    # スクレイピング
+    scraping
+
     # ボタン名の準備
     prepare_btn_name
 
@@ -190,6 +198,9 @@ class QuestionsController < ApplicationController
       @action_gone.destroy
     end
 
+    # スクレイピング
+    scraping
+
     # ボタン名の準備
     prepare_btn_name
 
@@ -204,10 +215,37 @@ class QuestionsController < ApplicationController
 
   end
 
-  # nothingののち、はじめからやり直す
-  # TODO :再度ログインからやり直さずに質問画面から再開するには？
+  # def favorite
+  #
+  #   p '---------------------------------'
+  #   p ' QuestionsController - favorite'
+  #   p '---------------------------------'
+  #   # スクレイピング
+  #   scraping
+  #
+  #   # ボタン名の準備
+  #   prepare_btn_name
+  #
+  #   # 店舗情報を準備
+  #   prepare_shop_info
+  #   # 行った・行きたい情報を準備
+  #   prepare_want_to_go
+  #   prepare_has_gone
+  #
+  #   # 店舗紹介画面を描画
+  #   render :action => "answer"
+  #
+  # end
+
+    # nothingののち、はじめからやり直す
   def retry
-    session.clear
+    session[:question1].clear
+    session[:answer1].clear
+    session[:question2].clear
+    session[:answer2].clear
+    session[:question3].clear
+    session[:answer3].clear
+    session[:displayed_shop_ids].clear
     redirect_to :action => "index"
   end
 
