@@ -44,6 +44,10 @@ Rails.application.routes.draw do
   post "has_gone" => "questions#has_gone"
   get "has_gone" => "questions#has_gone"
 
+  # お気に入り
+  post "favorite" => "questions#favorite"
+  get "favorite" => "questions#favorite"
+
   # レコメンドする店舗がないとき
   get "error" => "questions#nothing"
   post "error" => "questions#nothing"

@@ -77,6 +77,9 @@
                   <img src="<%= wanted_rest_info["image_url"]["shop_image1"] %>">
 
                   <p><%= wanted_rest_info["name"] %></p>
+                  <%= form_tag :action => "favorite" do %>
+                      <input type="submit" value="お気に入り">
+                  <% end %>
                 </a>
             <% end %>
         <% else %>
