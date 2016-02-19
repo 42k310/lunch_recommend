@@ -1,3 +1,4 @@
 google_api:
+  oauth2_url: "http://lunch.netprotections.com:3000/auth/google_oauth2"
   client_id: "120741168748-l2cdnj6k28akc7f37kmu1iifpp3vb4gt.apps.googleusercontent.com"
   client_secret: "HvLTOQlkOMJdF6nbl6Gat5Jg"
