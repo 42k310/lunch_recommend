@@ -37,12 +37,12 @@ Rails.application.routes.draw do
   get "next" => "questions#next"
 
   # 行きたい
-  post "want_to_go" => "questions#want_to_go"
   get "want_to_go" => "questions#want_to_go"
+  post "want_to_go" => "questions#want_to_go"
 
   # 行った
-  post "has_gone" => "questions#has_gone"
-  get "has_gone" => "questions#has_gone"
+  get "has_gone"  => "questions#has_gone"
+  post "has_gone"  => "questions#has_gone"
 
   # お気に入り
   post "favorite" => "questions#favorite"
