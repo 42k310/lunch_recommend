@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151225075347) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "actions", force: true do |t|
     t.integer  "user_id",     null: false
     t.integer  "shop_id",     null: false
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20151225075347) do
     t.datetime "updated_at"
   end
 
-  add_index "actions", ["user_id", "shop_id", "action_kind"], name: "unq_act_on_uid_sid_akd", unique: true
+  add_index "actions", ["user_id", "shop_id", "action_kind"], name: "unq_act_on_uid_sid_akd", unique: true, using: :btree
 
   create_table "answer_histories", force: true do |t|
     t.integer  "user_id",     null: false
@@ -40,12 +43,12 @@ ActiveRecord::Schema.define(version: 20151225075347) do
     t.datetime "updated_at"
   end
 
-  add_index "matches", ["shop_id", "question_id", "answer_type"], name: "unq_mtc_on_uid_qid_atp", unique: true
+  add_index "matches", ["shop_id", "question_id", "answer_type"], name: "unq_mtc_on_uid_qid_atp", unique: true, using: :btree
 
   create_table "questions", force: true do |t|
     t.string   "title",      limit: 100, null: false
-    t.text     "answer1",    limit: 50,  null: false
-    t.text     "answer2",    limit: 50,  null: false
+    t.text     "answer1",                null: false
+    t.text     "answer2",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -57,8 +60,8 @@ ActiveRecord::Schema.define(version: 20151225075347) do
     t.datetime "updated_at"
   end
 
-  add_index "shops", ["gnavi_id"], name: "unq_sp_on_gnavi_id", unique: true
-  add_index "shops", ["tblg_id"], name: "unq_sp_on_tblg_id", unique: true
+  add_index "shops", ["gnavi_id"], name: "unq_sp_on_gnavi_id", unique: true, using: :btree
+  add_index "shops", ["tblg_id"], name: "unq_sp_on_tblg_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",      null: false
@@ -74,6 +77,6 @@ ActiveRecord::Schema.define(version: 20151225075347) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

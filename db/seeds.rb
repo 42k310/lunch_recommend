@@ -14,7 +14,7 @@ end
 # csvファイルでのデータ投入（matches）
 require "csv"
 
-CSV.foreach('db/seeds/development/matches.csv') do |row|
+CSV.foreach('db/seeds/development/csv/matches.csv') do |row|
   Match.create(:id => row[0],
                :shop_id => row[1],
                :question_id => row[2],
@@ -22,7 +22,7 @@ CSV.foreach('db/seeds/development/matches.csv') do |row|
   end
 
 # csvファイルでのデータ投入（shops）
-CSV.foreach('db/seeds/development/shops.csv') do |row|
+CSV.foreach('db/seeds/development/csv/shops.csv') do |row|
   Shop.create(:id => row[0],
                :gnavi_id => row[1],
                :tblg_id => row[2])

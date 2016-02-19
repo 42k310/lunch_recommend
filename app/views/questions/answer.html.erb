@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "questions/answer", :media => "all" %>
+
 <script xmlns="http://www.w3.org/1999/html">
     $(function () {
         $(".food_pic").each(function () {
@@ -13,92 +15,116 @@
     });</script>
 
 <div class="upside_content">
-  <div class="map">
-    <iframe frameborder="0" style="border:0"
-            src="https://www.google.com/maps/embed/v1/directions?origin=35.673827%2C%20139.769051&destination=<%= @latitude %>%2C%20<%= @longitude %>&key=AIzaSyBvJ6IRWBb3ZLUKCUGaANZJW_xgHjKCmPs&mode=walking" allowfullscreen></iframe>
-  </div>
-
-  <div class="shop_detail">
-    <p>店舗情報</p>
-    <img src="<%= @shop_image %>">
-
-    <p><%= @name %></p>
-
-    <p><%= @tel %></p>
-
-    <p><%= @category %></p>
-
-    <p>ランチ相場：<%= @lunch %>円</p>
-
-    <p>バウチャー：</p>
-    <a href="http://bv.edenred.jp/search_shop/search/" target="_blank">調べる</a>
-
-    <p><%= @station %>から徒歩<%= @walk %>分</p>
-
-    <p><%= @smoking %></p>
-
-    <p><%= @private_room %></p>
-
-    <%= form_tag :action => "next" do %>
-        <input type="submit" value="ちがう店舗">
-    <% end %>
-    <%= form_tag :action => "want_to_go" do %>
-        <input type="submit" value="<%= @want_to_go_btn_name %>">
-    <% end %>
-    <%= form_tag :action => "has_gone" do %>
-        <input type="submit" value="<%= @has_gone_btn_name %>">
-    <% end %>
-
-  </div>
-</div>
-
-<div class="middle_content">
-  <div class="food_pic">
-    <ul>
-      <% @eles.each do |ele| %>
-          <li><img src="<%= ele %>"></li>
+  <div class="shop">
+    <div class="shop_title">
+      <h1><%= @name %></h1>
+    </div>
+    <div class="shop_pic">
+      <% if @shop_image.present? %>
+          <img src="<%= @shop_image %>">
+      <% else %>
+          <!-- 一旦これで -->
+          <img src="http://issj.school-website.jp/writing/2012/wp-content/uploads/NoImage.png">
       <% end %>
-    </ul>
+    </div>
+    <div class="shop_info">
+      <p><%= @category %></p>
+
+      <% if @lunch.present? %>
+          <p>ランチ相場：<%= @lunch %>円</p>
+      <% else %>
+          <p>ランチ相場：情報はありません</p>
+      <% end %>
+
+      <p>バウチャー：</p>
+      <a href="http://bv.edenred.jp/search_shop/search/" target="_blank">調べる</a>
+
+      <p><%= @station %>から徒歩<%= @walk %>分</p>
+
+      <p><%= @smoking %></p>
+
+      <p><%= @private_room %></p>
+    </div>
+
+    <div class="food_pic">
+      <ul>
+        <% @eles.each do |ele| %>
+            <li><img src="<%= ele %>"></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="map">
+    <div class="map_title">
+      <h1>map</h1>
+    </div>
+    <div class="map_content">
+      <iframe frameborder="0" style="border:0"
+              src="https://www.google.com/maps/embed/v1/directions?origin=35.673827%2C%20139.769051&destination=<%= @latitude %>%2C%20<%= @longitude %>&key=AIzaSyBvJ6IRWBb3ZLUKCUGaANZJW_xgHjKCmPs&mode=walking" allowfullscreen></iframe>
+    </div>
+
+    <div class="button">
+      <div class="next_shop">
+        <%= form_tag :action => "next" do %>
+            <input type="submit" value="ちがう店舗">
+        <% end %>
+      </div>
+      <div class="want_to_go">
+        <%= form_tag :action => "want_to_go" do %>
+            <input type="submit" value="<%= @want_to_go_btn_name %>">
+        <% end %>
+      </div>
+      <div class="has_gone">
+        <%= form_tag :action => "has_gone" do %>
+            <input type="submit" value="<%= @has_gone_btn_name %>">
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="downside_content">
-  <div class="tab-menu">
-    <ul>
-      <li id="left" class="selected">行きたい</li>
-      <li id="right">行った</li>
-    </ul>
-
-    <div class="contents">
-      <div class="left">
+  <div class="want_to_go_menu">
+    <div class="want_to_go_title">
+      <h1>行きたい</h1>
+    </div>
+    <div class="want_to_go_list">
+      <div class="want_to_go_shop">
         <% if @wanted_rest_infos.present? %>
             <% @wanted_rest_infos.each do |wanted_rest_info| %>
                 <a href="<%= wanted_rest_info["url"] %>" target="_blank">
-                  <img src="<%= wanted_rest_info["image_url"]["shop_image1"] %>">
-
-                  <p><%= wanted_rest_info["name"] %></p>
-                  <%= form_tag :action => "favorite" do %>
-                      <input type="submit" value="お気に入り">
-                  <% end %>
+                  <div class="want_to_go_pic">
+                    <img src="<%= wanted_rest_info["image_url"]["shop_image1"] %>">
+                  </div>
+                  <div class="want_to_go_name">
+                    <p><%= wanted_rest_info["name"] %></p>
+                  </div>
                 </a>
             <% end %>
         <% else %>
             <p>「行きたい」登録している店舗はありません</p>
         <% end %>
       </div>
-      <div class="right">
-        <% if @gone_rest_infos.present? %>
-            <% @gone_rest_infos.each do |gone_rest_info| %>
-                <a href="<%= gone_rest_info["url"] %>" target="_blank">
-                  <img src="<%= gone_rest_info["image_url"]["shop_image1"] %>">
+    </div>
+  </div>
 
-                  <p><%= gone_rest_info["name"] %></p>
-                </a>
-            <% end %>
-        <% else %>
-            <p>「行った」登録している店舗はありません</p>
-        <% end %>
-      </div>
+  <div class="has_gone_menu">
+    <div class="has_gone_title">
+      <h1>行った</h1>
+    </div>
+    <div class="has_gone_list">
+      <% if @gone_rest_infos.present? %>
+          <% @gone_rest_infos.each do |gone_rest_info| %>
+              <a href="<%= gone_rest_info["url"] %>" target="_blank">
+                <img src="<%= gone_rest_info["image_url"]["shop_image1"] %>">
+
+                <p><%= gone_rest_info["name"] %></p>
+              </a>
+          <% end %>
+      <% else %>
+          <p>「行った」登録している店舗はありません</p>
+      <% end %>
     </div>
   </div>
 </div>

@@ -7,6 +7,8 @@ class CreateShops < ActiveRecord::Migration
       t.string :gnavi_id, :null => false, limit: 255
       # 食べログID（スクレイピングで利用）
       t.string :tblg_id, :null => false, limit: 255
+      #
+      # t.integer :vouchers, :null => false
 
       t.timestamps
 
