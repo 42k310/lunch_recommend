@@ -39,11 +39,11 @@
     <%= form_tag :action => "next" do %>
         <input type="submit" value="ちがう店舗">
     <% end %>
-    <%= form_tag :action => "want_to_go" do %>
-        <input type="submit" value="<%= @want_to_go_btn_name %>">
+    <%= form_tag "/want_to_go", remote: true do %>
+        <%= submit_tag(@want_to_go_btn_name, id: "want_to_go_submit") %>
     <% end %>
-    <%= form_tag :action => "has_gone" do %>
-        <input type="submit" value="<%= @has_gone_btn_name %>">
+    <%= form_tag "/has_gone", remote: true do %>
+        <%= submit_tag(@has_gone_btn_name, id: "has_gone_submit") %>
     <% end %>
 
   </div>

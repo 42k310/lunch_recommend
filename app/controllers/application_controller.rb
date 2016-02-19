@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
 
   # CSRF対策（不正な場合はSessionをクリア）
-  protect_from_forgery
+  # TODO: 設定を有効にしてもAjaxが動くように
+  # protect_from_forgery
 
   # SSL証明書の検証をしない
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE

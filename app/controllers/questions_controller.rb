@@ -78,7 +78,7 @@ class QuestionsController < ApplicationController
     end
 
     # アクションとボタン名の準備
-    actions = get_actions(shop_id, current_user.id)
+    actions = get_actions(@shop.id, current_user.id)
     @action_want = actions[:action_want]
     @action_gone = actions[:action_gone]
     prepare_btn_name(@action_want, @action_gone)
@@ -127,15 +127,7 @@ class QuestionsController < ApplicationController
     # ボタン名の準備
     prepare_btn_name(@action_want, @action_gone)
 
-    # 店舗情報を準備
-    prepare_shop_info
-
-    # 行った・行きたい情報を準備
-    prepare_want_to_go
-    prepare_has_gone
-
-    # 店舗紹介画面を描画
-    render :action => "answer"
+    render  :action => "ajx/want_to_go"
 
   end
 
@@ -170,14 +162,7 @@ class QuestionsController < ApplicationController
     # ボタン名の準備
     prepare_btn_name(@action_want, @action_gone)
 
-    # 店舗情報を準備
-    prepare_shop_info
-    # 行った・行きたい情報を準備
-    prepare_want_to_go
-    prepare_has_gone
-
-    # 店舗紹介画面を描画
-    render :action => "answer"
+    render  :action => "ajx/has_gone"
 
   end
 
