@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 
+
 $(window).on("load", function () {
     $("li").on("click", function () {
         $("li.selected").removeClass("selected");
