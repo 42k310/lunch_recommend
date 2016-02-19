@@ -1,4 +1,4 @@
 google_api:
-  oauth2_url: "http://lunch.np-atobarai.info/auth/google_oauth2"
+  oauth2_url: "https://lunch.np-atobarai.info/auth/google_oauth2"
   client_id: "93513929418-9kfu3jt5qvrrpv9js2hdcfrafsh09k5s.apps.googleusercontent.com"
   client_secret: "smVB2MImrqQyzaVD2L2l8gUp"
