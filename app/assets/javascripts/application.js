@@ -2,6 +2,7 @@
 //= require jquery_ujs
 
 
+
 $(window).on("load", function () {
     $("li").on("click", function () {
         $("li.selected").removeClass("selected");
@@ -17,7 +18,6 @@ window.addEventListener("load", function () {
         $(function () {
             $("#answer1_type").attr("value", 1);
         });
-
         $("#ans_block1").css("visibility", "hidden");
         $("#ans_block2").css("visibility", "visible")
     });
@@ -66,4 +66,17 @@ window.addEventListener("load", function () {
         });
     });
 
+});
+
+$(function () {
+    $(".food_pic").each(function () {
+        $(this).find("li:gt(20)").each(function () {
+            $(this).hide();
+        });
+        $(this).append('<p>» もっと見る</p>');
+        $(this).find("p:last").click(function () {
+            $(this).parent().find("li").show(400);
+            $(this).remove();
+        });
+    });
 });

@@ -1,3 +1,6 @@
+<%= stylesheet_link_tag "questions/questions", :media => "all" %>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+
 <div class="square">
 
   <div id="ans_block1" class="selected">
@@ -5,12 +8,14 @@
       <p><%= @questions[0].title %></p>
     </div>
 
-    <div class="answer<%= @questions[0].id %>">
-      <div id="ans1_left">
-        <input type="button" value="<%= @questions[0].answer1 %>">
-      </div>
-      <div id="ans1_right">
-        <input type="button" value="<%= @questions[0].answer2 %>">
+    <div class="answer">
+      <div class="answer<%= @questions[0].id %>">
+        <div id="ans1_left">
+          <input type="button" value="<%= @questions[0].answer1 %>">
+        </div>
+        <div id="ans1_right">
+          <input type="button" value="<%= @questions[0].answer2 %>">
+        </div>
       </div>
     </div>
   </div>
@@ -20,12 +25,14 @@
       <p><%= @questions[1].title %></p>
     </div>
 
-    <div class="answer<%= @questions[1].id %>">
-      <div id="ans2_left">
-        <input type="button" value="<%= @questions[1].answer1 %>">
-      </div>
-      <div id="ans2_right">
-        <input type="button" value="<%= @questions[1].answer2 %>">
+    <div class="answer">
+      <div class="answer<%= @questions[1].id %>">
+        <div id="ans2_left">
+          <input type="button" value="<%= @questions[1].answer1 %>">
+        </div>
+        <div id="ans2_right">
+          <input type="button" value="<%= @questions[1].answer2 %>">
+        </div>
       </div>
     </div>
   </div>
@@ -35,20 +42,22 @@
       <p><%= @questions[2].title %></p>
     </div>
 
-    <div class="answer<%= @questions[2].id %>">
-      <%= form_tag :action => "answer" do %>
-          <div id="ans3_left">
-            <input id="answer1_type" type="hidden" name="[answer1][answer_type]" value="">
-            <input id="question_id" type="hidden" name="[answer1][question_id]" value="<%= @questions[0].id %>">
-            <input id="answer2_type" type="hidden" name="[answer2][answer_type]" value="">
-            <input id="qustion_id" type="hidden" name="[answer2][question_id]" value="<%= @questions[1].id %>">
-            <input id="answer3_type" type="hidden" name="[answer3][answer_type]" value="">
-            <input id="question_id" type="hidden" name="[answer3][question_id]" value="<%= @questions[2].id %>">
-            <input type="submit" value="<%= @questions[2].answer1 %>">
-          </div>
-          <div id="ans3_right">
-            <input type="submit" value="<%= @questions.third.answer2 %>">
-      <% end %>
+    <div class="answer">
+      <div class="answer<%= @questions[2].id %>">
+        <%= form_tag :action => "answer" do %>
+            <div id="ans3_left">
+              <input id="answer1_type" type="hidden" name="[answer1][answer_type]" value="">
+              <input id="question_id" type="hidden" name="[answer1][question_id]" value="<%= @questions[0].id %>">
+              <input id="answer2_type" type="hidden" name="[answer2][answer_type]" value="">
+              <input id="qustion_id" type="hidden" name="[answer2][question_id]" value="<%= @questions[1].id %>">
+              <input id="answer3_type" type="hidden" name="[answer3][answer_type]" value="">
+              <input id="question_id" type="hidden" name="[answer3][question_id]" value="<%= @questions[2].id %>">
+              <input type="submit" value="<%= @questions[2].answer1 %>">
+            </div>
+            <div id="ans3_right">
+              <input type="submit" value="<%= @questions.third.answer2 %>">
+        <% end %>
+        </div>
       </div>
     </div>
   </div>

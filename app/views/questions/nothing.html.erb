@@ -1,6 +1,11 @@
-<font color="#f0f8ff">
-  <p>notihngです</p>
-  <%= form_tag :action => "retry" do %>
-      <input type="submit" value="もう一度最初から">
-  <% end %>
-</font>
+<%= stylesheet_link_tag "questions/sessions", :media => "all" %>
+
+<div class="square">
+  <h1>もう店舗がありません…</h1>
+
+  <div id="nothing">
+    <%= form_tag :action => "retry" do %>
+        <input type="submit" value="もう一度最初から">
+    <% end %>
+  </div>
+</div>

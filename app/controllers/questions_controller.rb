@@ -14,15 +14,18 @@ class QuestionsController < ApplicationController
   def index
 
     # TODO: Questionが取得できない・または3件取得できなかった場合、システムエラー画面に飛ばすこと（※要確認）
+    # TODO: システムエラー画面に飛ばせているかの確認方法を相澤さんへ確認
     @questions = Question.order("RANDOM()").limit(3)
 
     # @questionsの中身が存在し、その数が３つなら通常通り処理、そうでないならシステムエラー画面に飛ばす
     if @questions.present?
       if @questions.count == 3
         render :action => "index"
+      else
+        render :action => "500.html"
       end
     else
-      render :action => "nothing"
+      render :action => "500"
     end
 
   end
@@ -434,6 +437,10 @@ class QuestionsController < ApplicationController
 
       if private_room.include?("個室")
         @private_room = "個室あり"
+      elsif private_room.include?("※個室の詳細はお店にお問い合わせください")
+        @private_room = "※個室の詳細はお店にお問い合わせください"
+      else
+        @private_room= "情報なし"
       end
     end
 
@@ -448,7 +455,7 @@ class QuestionsController < ApplicationController
         @smoking = "喫煙可"
         break
       else
-        @smoking = "禁煙"
+        @smoking = "情報なし"
       end
     end
 

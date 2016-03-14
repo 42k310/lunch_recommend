@@ -1,0 +1,250 @@
+body {
+  width: 100%;
+  background-image: none;
+  background-color: #d9ccb3;
+
+  .content {
+    margin: 30px auto;
+//    margin-right: 100px;
+    width: 1000px;
+    box-shadow: 3px 3px 2px #555;
+
+    h1 {
+      color: #faf0e6;
+      height: 26px;
+      font-size: 20px;
+      padding: 7px 0 ;
+    }
+
+  .upside_content {
+    width: 1000px;
+    background-color: #faf0e6;
+
+    .shop {
+      width: 500px;
+      height: auto;
+      float: left;
+
+      .shop_title h1 {
+        background-color: #FF874F;
+        width: 490px;
+        float: left;
+        margin: 0;
+        padding: 5px;
+      }
+
+      .shop_pic {
+        width: 230px;
+        height: auto;
+        float: left;
+        margin: 10px;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .food_pic {
+        width: 100%;
+        height: auto;
+        float: left;
+        ul {
+          width: 100%;
+          padding: 0 5px 0 5px;
+          li {
+            float: left;
+            list-style: none;
+            background: center;
+          }
+        }
+        img {
+          width: 60px;
+          height: 60px;
+          overflow: hidden;
+          padding: 5px;
+        }
+        p {
+          float: right;
+          font-size: 14px;
+          margin: 0px;
+          padding-top: 0;
+          padding-bottom: 10px;
+          padding-right: 10px;
+          cursor: pointer;
+        }
+      }
+
+      .shop_info {
+        float: left;
+        width: 45%;
+        margin: 10px;
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        th {
+          border: solid 1px #3b3e45;
+          padding: 0.5em;
+          font-size: 12px;
+          width: 40%;
+          background-color: #606D2C;
+          color: #faf0e6;
+        }
+        td {
+          border: solid 1px #686c73;
+          padding: 0.5em;
+          font-size: 10px;
+          width: 60%;
+        }
+        p {
+          margin: 2px;
+        }
+      }
+
+    }
+
+    .map {
+      float: left;
+      width: 500px;
+      height: auto;
+
+      .map_title h1 {
+        background-color: #416e98;
+        width: 490px;
+        margin: 0;
+        padding: 5px;
+      }
+
+      .map_content {
+        width: 480px;
+        height: 400px;
+        margin: 10px;
+      }
+
+      .button {
+        margin: 0 50px;
+        .next_shop {
+          input {
+            float: left;
+            margin: 15px 10px;
+            border:1px solid #abcb2e;-webkit-box-shadow: #777 3px 3px 3px  ;-moz-box-shadow: #777 3px 3px 3px ; box-shadow: #777 2px 2px 2px  ; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px; padding: 10px 20px 10px 20px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+            background-color: #BFD958; background-image: -webkit-gradient(linear, left top, left bottom, from(#BFD958), to(#606D2C));
+            background-image: -webkit-linear-gradient(top, #BFD958, #606D2C);
+            background-image: -moz-linear-gradient(top, #BFD958, #606D2C);
+            background-image: -ms-linear-gradient(top, #BFD958, #606D2C);
+            background-image: -o-linear-gradient(top, #BFD958, #606D2C);
+            background-image: linear-gradient(to bottom, #BFD958, #606D2C);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#BFD958, endColorstr=#606D2C);
+            cursor: pointer;
+          }
+        }
+
+        .want_to_go {
+          float: left;
+          input {
+            margin: 15px 10px;
+            border:1px solid #ff7826;-webkit-box-shadow: #777 3px 3px 3px  ;-moz-box-shadow: #777 3px 3px 3px ; box-shadow: #777 2px 2px 2px  ; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px; padding: 10px 20px 10px 20px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+            background-color: #FF9B5E; background-image: -webkit-gradient(linear, left top, left bottom, from(#FF9B5E), to(#D7834F));
+            background-image: -webkit-linear-gradient(top, #FF9B5E, #D7834F);
+            background-image: -moz-linear-gradient(top, #FF9B5E, #D7834F);
+            background-image: -ms-linear-gradient(top, #FF9B5E, #D7834F);
+            background-image: -o-linear-gradient(top, #FF9B5E, #D7834F);
+            background-image: linear-gradient(to bottom, #FF9B5E, #D7834F);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FF9B5E, endColorstr=#D7834F);
+            cursor: pointer;
+          }
+        }
+
+        .has_gone {
+          float: left;
+          input {
+            margin: 15px 10px;
+            border:1px solid #ffc431;-webkit-box-shadow: #777 3px 3px 3px  ;-moz-box-shadow: #777 3px 3px 3px ; box-shadow: #777 2px 2px 2px  ; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px; padding: 10px 20px 10px 20px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+            background-color: #FFD469; background-image: -webkit-gradient(linear, left top, left bottom, from(#FFD469), to(#D0AD56));
+            background-image: -webkit-linear-gradient(top, #FFD469, #D0AD56);
+            background-image: -moz-linear-gradient(top, #FFD469, #D0AD56);
+            background-image: -ms-linear-gradient(top, #FFD469, #D0AD56);
+            background-image: -o-linear-gradient(top, #FFD469, #D0AD56);
+            background-image: linear-gradient(to bottom, #FFD469, #D0AD56);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFD469, endColorstr=#D0AD56);
+            cursor: pointer;
+          }
+        }
+
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+    .clear {
+      clear: both;
+    }
+
+  .downside_content {
+
+    background-color: #faf0e6;
+    width: 1000px;
+    float: left;
+
+    p{
+      font-size: 14px;
+    }
+
+    .want_to_go_menu {
+      .want_to_go_title h1 {
+        background-color: #FF874F;
+        width: 990px;
+        margin: 0;
+        padding: 5px;
+      }
+
+      .want_to_go_list {
+        .want_to_go_shop {
+          .want_to_go_pic {
+            img {
+              margin: 10px 10px 0 10px;
+              width: 150px;
+            }
+          }
+          .want_to_go_name  p {
+            width: 150px;
+            margin: 10px;
+          }
+          p {
+            float: left;
+            margin: 10px;
+          }
+        }
+      }
+    }
+
+    .has_gone_menu {
+      .has_gone_title h1 {
+        background-color: #F0C863;
+        width: 990px;
+        margin: 0;
+        padding: 5px;
+      }
+      .has_gone_list {
+        .has_gone_shop {
+          .has_gone_pic {
+            img {
+              margin: 10px 10px 0 10px;
+              width: 150px;
+            }
+          }
+          .has_gone_name  p {
+            width: 150px;
+            margin: 10px;
+          }
+          p {
+            float: left;
+            margin: 10px;
+          }
+        }
+      }
+    }
+  }
+  }
+}

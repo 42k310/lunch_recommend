@@ -1,0 +1,110 @@
+body {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  background: url(restaurant_open.JPG) no-repeat center center;
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+}
+
+.square {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  margin: 0 0 50px 0;
+  padding: 0 0 10% 0;
+  height: 300px; /* 可変にしたい */
+  width: 50%;
+  border-radius: 5%;
+
+  .question_title {
+    p {
+      font-size: 28px;
+    }
+  }
+
+  #signin {
+    margin: 25%;
+  }
+  img {
+    width: 300px;
+  }
+}
+
+.square p {
+  color: #faf0e6;
+}
+
+.answer {
+  padding: 20px;
+
+  #ans1_left, #ans2_left, #ans3_left {
+    float: left;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    background: #FF874F;
+    padding: 20px 20px;
+    margin: 0 0 0 10%;
+    box-shadow: 0px 3px 2px #000;
+    border: 2px solid #b15d28;
+
+  }
+
+  #ans1_right, #ans2_right, #ans3_right {
+    float: right;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    background: #288741;
+    padding: 20px 20px;
+    margin: 0 10% 0 0;
+    box-shadow: 0px 3px 2px #000;
+    border: 2px solid #165C23;
+  }
+
+  input {
+    height: 120px;
+    width: 120px;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
+    font-weight: bold;
+    font-size: 18px;
+    color: #faf0e6;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+    word-wrap: break-word;
+    cursor: pointer;
+  }
+}
+
+#ans_block1 {
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  padding: 10% 10% 0 10%;
+}
+
+#ans_block2 {
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  padding: 10% 10% 0 10%;
+  visibility: hidden;
+}
+
+#ans_block3 {
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  padding: 10% 10% 0 10%;
+  visibility: hidden;
+}
