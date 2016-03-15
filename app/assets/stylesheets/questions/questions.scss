@@ -46,11 +46,12 @@ body {
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    background: #FF874F;
+    background: -moz-linear-gradient(left top 315deg, #FFAB00, #FFD740);
+    background: -webkit-gradient(linear, left top, right bottom, from(#FFAB00), to(#FFD740));
     padding: 20px 20px;
     margin: 0 0 0 10%;
     box-shadow: 0px 3px 2px #000;
-    border: 2px solid #b15d28;
+//    border: 2px solid #b15d28;
 
   }
 
@@ -59,11 +60,12 @@ body {
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    background: #288741;
+    background: -moz-linear-gradient(left top 315deg, #AEEA00, #EEFF41);
+    background: -webkit-gradient(linear, left top, right bottom, from(#AEEA00), to(#EEFF41));
     padding: 20px 20px;
     margin: 0 10% 0 0;
     box-shadow: 0px 3px 2px #000;
-    border: 2px solid #165C23;
+//    border: 2px solid #165C23;
   }
 
   input {
