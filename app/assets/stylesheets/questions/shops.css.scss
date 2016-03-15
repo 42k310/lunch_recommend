@@ -1,13 +1,14 @@
 body {
   width: 100%;
-  background-image: none;
-  background-color: #d9ccb3;
+  background-image: url(tileable_wood_texture.png);
+//  background-image: none;
+//  background-color: #d9ccb3;
 
   .content {
     margin: 30px auto;
 //    margin-right: 100px;
     width: 1000px;
-    box-shadow: 3px 3px 2px #555;
+    box-shadow: 0px 0px 10px 1px #555;
 
     h1 {
       color: #faf0e6;
@@ -18,7 +19,10 @@ body {
 
   .upside_content {
     width: 1000px;
-    background-color: #faf0e6;
+//    background-color: #faf0e6;
+//    background: -moz-linear-gradient(left top 315deg, #FFE0B2, #FFF3E0);
+//    background: -webkit-gradient(linear, left top, right bottom, from(#FFE0B2), to(#FFF3E0));
+    background-image: url(lightpaperfibers.png);
 
     .shop {
       width: 500px;
@@ -26,11 +30,16 @@ body {
       float: left;
 
       .shop_title h1 {
-        background-color: #FF874F;
+        background: -moz-linear-gradient(left top 315deg, #FB8C00, #FFB74D);
+        background: -webkit-gradient(linear, left top, right bottom, from(#FB8C00), to(#FFB74D));
+        box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
+        -webkit-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
+        -moz-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
+
         width: 490px;
         float: left;
         margin: 0;
-        padding: 5px;
+        padding: 15px;
       }
 
       .shop_pic {
@@ -109,10 +118,11 @@ body {
       height: auto;
 
       .map_title h1 {
-        background-color: #416e98;
+        background: -moz-linear-gradient(left top 315deg, #FB8C00, #FFB74D);
+        background: -webkit-gradient(linear, left top, right bottom, from(#FB8C00), to(#FFB74D));
         width: 490px;
         margin: 0;
-        padding: 5px;
+        padding: 15px;
       }
 
       .map_content {
@@ -183,7 +193,10 @@ body {
 
   .downside_content {
 
-    background-color: #faf0e6;
+//    background: -moz-linear-gradient(left top 315deg, #FFE0B2, #FFF3E0);
+//    background: -webkit-gradient(linear, left top, right bottom, from(#FFE0B2), to(#FFF3E0));
+    background-image: url(lightpaperfibers.png);
+
     width: 1000px;
     float: left;
 
@@ -193,10 +206,16 @@ body {
 
     .want_to_go_menu {
       .want_to_go_title h1 {
-        background-color: #FF874F;
+
+        background: -moz-linear-gradient(left top 315deg, #FF7043, #FFAB91);
+        background: -webkit-gradient(linear, left top, right bottom, from(#FF7043), to(#FFAB91));
+        box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
+        -webkit-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
+        -moz-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
+
         width: 990px;
         margin: 0;
-        padding: 5px;
+        padding: 10px;
       }
 
       .want_to_go_list {
@@ -221,10 +240,14 @@ body {
 
     .has_gone_menu {
       .has_gone_title h1 {
-        background-color: #F0C863;
+        background: -moz-linear-gradient(left top 315deg, #FFB300, #FFD54F);
+        background: -webkit-gradient(linear, left top, right bottom, from(#FFB300), to(#FFD54F));
+        box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
+        -webkit-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
+        -moz-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
         width: 990px;
         margin: 0;
-        padding: 5px;
+        padding: 10px;
       }
       .has_gone_list {
         .has_gone_shop {
