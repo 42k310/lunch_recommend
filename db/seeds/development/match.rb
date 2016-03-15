@@ -29,12 +29,12 @@ gnavi_ids.each do |gnavi_id|
     p @lunch
     if @lunch > 1000
       p "#{gnavi_id}は1000円以上です"
-      test = Shop.find(:conditions => { :gnavi_id => gnavi_id }).id
-      if test.present?
-        p test
-      else
-        p "なし"
-      end
+      # test = Shop.find(:conditions => { :gnavi_id => gnavi_id })
+      # if test.present?
+      #   p test
+      # else
+      #   p "なし"
+      # end
 
     else
       p "#{gnavi_id}は1000円以下です"
