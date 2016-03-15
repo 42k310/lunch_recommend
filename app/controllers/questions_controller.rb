@@ -1,5 +1,7 @@
 class QuestionsController < ApplicationController
 
+  respond_to :js, :html
+
   # TODO: お気に入り店舗の登録（want程度の優先度）
   # 要ログイン
   before_filter :login_required
@@ -169,7 +171,15 @@ class QuestionsController < ApplicationController
     # ボタン名の準備
     prepare_btn_name(@action_want, @action_gone)
 
-    render  :action => "ajx/want_to_go"
+    # 店舗情報を準備
+    prepare_shop_info
+
+    # 行った・行きたいを準備
+    prepare_has_gone
+    prepare_want_to_go
+
+    # render  :action => "ajx/want_to_go"
+    render :action =>  "answer"
 
   end
 
@@ -207,7 +217,15 @@ class QuestionsController < ApplicationController
     # ボタン名の準備
     prepare_btn_name(@action_want, @action_gone)
 
-    render  :action => "ajx/has_gone"
+    # 店舗情報を準備
+    prepare_shop_info
+
+    # 行った・行きたいを準備
+    prepare_has_gone
+    prepare_want_to_go
+
+    # render  :action => "ajx/has_gone"
+    render :action =>  "answer"
 
   end
 
@@ -261,6 +279,7 @@ class QuestionsController < ApplicationController
 
     # ぐるなびAPI利用
     @name = @rest_info["name"]
+    @shop_url = @rest_info["url"]
     @shop_image = @rest_info["image_url"]["shop_image1"]
     @tel = @rest_info["tel"]
     @category = @rest_info["category"]

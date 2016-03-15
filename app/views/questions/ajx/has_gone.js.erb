@@ -1,5 +1,20 @@
 (function(){
-    <% p 'has_gone' %>
-    console.log('has_gone');
-    $('#has_gone_submit')
+    console.log("want_to_go_btn_name");
+
+    var add_shop_tag = "<div class='has_gone_shop'>"
+            + "<div class='has_gone_pic'>"
+            + "<a href='<%= @shop_url %>' target='_blank'>"
+            + "<img src='<%= @shop_image %>'>"
+            + "</a>"
+            + "</div>"
+            + "<div class='has_gone_name'>"
+            + "<a href='<%= @shop_url %>' target='_blank'>"
+            + "<%= @name %>"
+            + "</a>"
+            + "<div class='clear'></div>"
+            + "</div>"
+            + "</div>"
+
+    $('.has_gone_list').append(add_shop_tag)
+
 });
