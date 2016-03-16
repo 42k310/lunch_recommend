@@ -123,11 +123,18 @@ class QuestionsController < ApplicationController
       # スクレイピング
       scraping
 
+      # ボタン名の準備
+      prepare_btn_name(@action_want, @action_gone)
+
       # 店舗情報を取得
       @shop = Shop.find_by(id: session[:match])
 
       # 店舗のぐるなび情報を取得
       prepare_shop_info()
+
+      # 行った・行きたいを準備
+      prepare_has_gone
+      prepare_want_to_go
 
       render :action =>  "answer" and return
     else
