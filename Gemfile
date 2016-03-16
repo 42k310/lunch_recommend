@@ -43,7 +43,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
 # 設定ファイル
-gem 'config'
+gem 'config', '1.0.0'
 
 # APIクライアント
 gem 'faraday'
