@@ -39,4 +39,8 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(uid: session[:uid]) if session[:uid]
   end
 
+  # 404エラー
+  rescue_from AbstractController::ActionNotFound, with: :error_404 unless Rails.env.development?
+  rescue_from ActionController::RoutingError, with: :error_404 unless Rails.env.development?
+
 end

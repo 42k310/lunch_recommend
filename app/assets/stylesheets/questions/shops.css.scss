@@ -32,11 +32,8 @@ body {
       .shop_title h1 {
         background: -moz-linear-gradient(left top 315deg, #FB8C00, #FFB74D);
         background: -webkit-gradient(linear, left top, right bottom, from(#FB8C00), to(#FFB74D));
-        box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
-        -webkit-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
-        -moz-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
 
-        width: 490px;
+        width: 970px;
         float: left;
         margin: 0;
         padding: 15px;
@@ -50,6 +47,9 @@ body {
 
         img {
           width: 100%;
+          padding: 2px;
+          background-color: #fff;
+          box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.8);
         }
       }
 
@@ -70,7 +70,10 @@ body {
           width: 60px;
           height: 60px;
           overflow: hidden;
-          padding: 5px;
+          margin: 4px;
+          padding: 1px;
+          background-color: #fff;
+          box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.8);
         }
         p {
           float: right;
@@ -96,7 +99,7 @@ body {
           padding: 0.5em;
           font-size: 12px;
           width: 40%;
-          background-color: #606D2C;
+          background-color: #558b2f;
           color: #faf0e6;
         }
         td {
@@ -117,63 +120,66 @@ body {
       width: 500px;
       height: auto;
 
-      .map_title h1 {
-        background: -moz-linear-gradient(left top 315deg, #FB8C00, #FFB74D);
-        background: -webkit-gradient(linear, left top, right bottom, from(#FB8C00), to(#FFB74D));
-        width: 490px;
-        margin: 0;
-        padding: 15px;
-      }
-
       .map_content {
         width: 480px;
         height: 400px;
-        margin: 10px;
+        margin: 66px 10px 10px 10px;
       }
 
       .button {
-        margin: 0 50px;
+        margin: 0 55px;
         .next_shop {
+          float: left;
+          width: 130px;
           input {
-            float: left;
             margin: 15px 10px;
             border:1px solid #abcb2e;-webkit-box-shadow: #777 3px 3px 3px  ;-moz-box-shadow: #777 3px 3px 3px ; box-shadow: #777 2px 2px 2px  ; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px; padding: 10px 20px 10px 20px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
-            background-color: #BFD958; background-image: -webkit-gradient(linear, left top, left bottom, from(#BFD958), to(#606D2C));
-            background-image: -webkit-linear-gradient(top, #BFD958, #606D2C);
-            background-image: -moz-linear-gradient(top, #BFD958, #606D2C);
-            background-image: -ms-linear-gradient(top, #BFD958, #606D2C);
-            background-image: -o-linear-gradient(top, #BFD958, #606D2C);
-            background-image: linear-gradient(to bottom, #BFD958, #606D2C);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#BFD958, endColorstr=#606D2C);
+//            background-color: #5ED640; background-image: -webkit-gradient(linear, left top, left bottom, from(#5ED640), to(#358F2B));
+            background-image: -webkit-linear-gradient(top, #689F38, #558B2F);
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            word-wrap: break-word;
             cursor: pointer;
           }
         }
 
         .want_to_go {
           float: left;
+          width: 130px;
           input {
             margin: 15px 10px;
             border:1px solid #ff7826;-webkit-box-shadow: #777 3px 3px 3px  ;-moz-box-shadow: #777 3px 3px 3px ; box-shadow: #777 2px 2px 2px  ; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px; padding: 10px 20px 10px 20px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
-            background-color: #FF9B5E; background-image: -webkit-gradient(linear, left top, left bottom, from(#FF9B5E), to(#D7834F));
-            background-image: -webkit-linear-gradient(top, #FF9B5E, #D7834F);
-            background-image: -moz-linear-gradient(top, #FF9B5E, #D7834F);
-            background-image: -ms-linear-gradient(top, #FF9B5E, #D7834F);
-            background-image: -o-linear-gradient(top, #FF9B5E, #D7834F);
-            background-image: linear-gradient(to bottom, #FF9B5E, #D7834F);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FF9B5E, endColorstr=#D7834F);
+//            background-color: #FF4529; background-image: -webkit-gradient(linear, left top, left bottom, from(#FF4529), to(#FF7144));
+            background-image: -webkit-linear-gradient(top, #ff8a80, #ff5252);
+//            background-image: -moz-linear-gradient(top, #FF4529, #FF3030);
+//            background-image: -ms-linear-gradient(top, #FF4529, #FF3030);
+//            background-image: -o-linear-gradient(top, #FF4529, #FF3030);
+//            background-image: linear-gradient(to bottom, #FF4529, #FF3030);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FF4529, endColorstr=#FF3030);
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            word-wrap: break-word;
             cursor: pointer;
           }
         }
 
         .has_gone {
           float: left;
+          width: 130px;
           input {
             margin: 15px 10px;
             border:1px solid #ffc431;-webkit-box-shadow: #777 3px 3px 3px  ;-moz-box-shadow: #777 3px 3px 3px ; box-shadow: #777 2px 2px 2px  ; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px; padding: 10px 20px 10px 20px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
-            background-color: #FFD469; background-image: -webkit-gradient(linear, left top, left bottom, from(#FFD469), to(#D0AD56));
-            background-image: -webkit-linear-gradient(top, #FFD469, #D0AD56);
-            background-image: -moz-linear-gradient(top, #FFD469, #D0AD56);
-            background-image: -ms-linear-gradient(top, #FFD469, #D0AD56);
-            background-image: -o-linear-gradient(top, #FFD469, #D0AD56);
-            background-image: linear-gradient(to bottom, #FFD469, #D0AD56);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFD469, endColorstr=#D0AD56);
+//            background-color: #FFD469; background-image: -webkit-gradient(linear, left top, left bottom, from(#FFD469), to(#D0AD56));
+            background-image: -webkit-linear-gradient(top, #FFC400, #FFAB00);
+//            background-image: -moz-linear-gradient(top, #FFD469, #D0AD56);
+//            background-image: -ms-linear-gradient(top, #FFD469, #D0AD56);
+//            background-image: -o-linear-gradient(top, #FFD469, #D0AD56);
+//            background-image: linear-gradient(to bottom, #FFD469, #D0AD56);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFD469, endColorstr=#D0AD56);
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            word-wrap: break-word;
             cursor: pointer;
           }
         }
@@ -214,16 +220,20 @@ body {
         -moz-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
 
         width: 990px;
-        margin: 0;
-        padding: 10px;
+        margin: 0 0 0 -5px;
+        padding: 10px 5px 10px 10px;
       }
 
       .want_to_go_list {
+        min-height: 220px;
         .want_to_go_shop {
           .want_to_go_pic {
             img {
               margin: 10px 10px 0 10px;
               width: 150px;
+              padding: 2px;
+              background-color: #fff;
+              box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.8);
             }
           }
           .want_to_go_name  p {
@@ -233,6 +243,7 @@ body {
           p {
             float: left;
             margin: 10px;
+            padding: 3px;
           }
         }
       }
@@ -245,16 +256,21 @@ body {
         box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
         -webkit-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
         -moz-box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.6);
+
         width: 990px;
-        margin: 0;
-        padding: 10px;
+        margin: 0 0 0 -5px;
+        padding: 10px 5px 10px 10px;
       }
       .has_gone_list {
+        min-height: 220px;
         .has_gone_shop {
           .has_gone_pic {
             img {
               margin: 10px 10px 0 10px;
               width: 150px;
+              padding: 2px;
+              background-color: #fff;
+              box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.8);
             }
           }
           .has_gone_name  p {
@@ -264,6 +280,7 @@ body {
           p {
             float: left;
             margin: 10px;
+            padding: 3px;
           }
         }
       }

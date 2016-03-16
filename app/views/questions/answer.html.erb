@@ -10,7 +10,6 @@
         <% if @shop_image.present? %>
             <img src="<%= @shop_image %>">
         <% else %>
-            <!-- 一旦これで -->
             <%= image_tag "nothing.jpg" %>
         <% end %>
       </div>
@@ -32,7 +31,7 @@
           </tr>
           <tr>
             <th>バウチャー</th>
-            <td><a href="http://bv.edenred.jp/search_shop/search/" target="_blank">調べる</a>
+            <td><%= @voucher %>
             </td>
           </tr>
           <tr>
@@ -50,6 +49,26 @@
             <td>
               <% if @private_room.present? %>
                   <p><%= @private_room %></p>
+              <% else %>
+                  <p>情報はありません</p>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>住所</th>
+            <td>
+              <% if @address.present? %>
+                  <p><%= @address %></p>
+              <% else %>
+                  <p>情報はありません</p>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <td>
+              <% if @tel.present? %>
+                  <p><%= @tel %></p>
               <% else %>
                   <p>情報はありません</p>
               <% end %>
@@ -73,9 +92,6 @@
     </div>
 
     <div class="map">
-      <div class="map_title">
-        <h1>map</h1>
-      </div>
       <div class="map_content">
         <iframe frameborder="0" style="border:0"
                 src="https://www.google.com/maps/embed/v1/directions?origin=35.673827%2C%20139.769051&destination=<%= @latitude %>%2C%20<%= @longitude %>&key=AIzaSyBvJ6IRWBb3ZLUKCUGaANZJW_xgHjKCmPs&mode=walking" allowfullscreen></iframe>
@@ -122,7 +138,7 @@
                 <% @wanted_rest_infos.each do |wanted_rest_info| %>
                     <a href="<%= wanted_rest_info["url"] %>" target="_blank">
                     <p><%= wanted_rest_info["name"] %></p>
-                        </a>
+                    </a>
                 <% end %>
                 <div class="clear"></div>
               </div>

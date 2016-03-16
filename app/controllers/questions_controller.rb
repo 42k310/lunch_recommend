@@ -1,7 +1,5 @@
 class QuestionsController < ApplicationController
 
-  respond_to :js, :html
-
   # TODO: お気に入り店舗の登録（want程度の優先度）
   # 要ログイン
   before_filter :login_required
@@ -24,10 +22,10 @@ class QuestionsController < ApplicationController
       if @questions.count == 3
         render :action => "index"
       else
-        render :action => "500.html"
+        error500
       end
     else
-      render :action => "500"
+      error500
     end
 
   end
@@ -181,6 +179,7 @@ class QuestionsController < ApplicationController
     # render  :action => "ajx/want_to_go"
     render :action =>  "answer"
 
+
   end
 
   def has_gone
@@ -284,10 +283,20 @@ class QuestionsController < ApplicationController
     @tel = @rest_info["tel"]
     @category = @rest_info["category"]
     @lunch = @rest_info["lunch"]
-    @station = @rest_info["access"]["station"]
-    @walk = @rest_info["access"]["walk"]
-    @no_smoking = @rest_info["no_smoking"]
-    # @private_room = @rest_info["private_room"]
+    @address = @rest_info["address"]
+    @tel = @rest_info["tel"]
+    # @voucher_type = Match.find(:conditions => ["shop_id = ? and question_id = ?", session[:shop_id], 8]).answer_type # 1：使える 2：使えない
+    voucher_types = Match.where(shop_id: session[:shop_id]).where(question_id: 8)[0]
+    p "voucher_types"
+    p voucher_types
+    voucher_type = voucher_types["answer_type"]
+    p "voucher_type"
+    p voucher_type
+    if voucher_type == 1
+      @voucher = "○"
+      elsif voucher_type == 2
+        @voucher = "×"
+    end
 
     @latitude = @rest_info["latitude"].to_f - @rest_info["latitude"].to_f * 0.00010695 + @rest_info["longitude"].to_f * 0.000017464 + 0.0046017
     @longitude = @rest_info["longitude"].to_f - @rest_info["latitude"].to_f * 0.000046038 - @rest_info["longitude"].to_f * 0.000083043 + 0.010040
@@ -459,7 +468,7 @@ class QuestionsController < ApplicationController
       elsif private_room.include?("※個室の詳細はお店にお問い合わせください")
         @private_room = "※個室の詳細はお店にお問い合わせください"
       else
-        @private_room= "情報なし"
+        @private_room= "情報はありません"
       end
     end
 
@@ -474,10 +483,18 @@ class QuestionsController < ApplicationController
         @smoking = "喫煙可"
         break
       else
-        @smoking = "情報なし"
+        @smoking = "情報はありません"
       end
     end
 
+  end
+
+  def error500
+    render file: "#{Rails.root}/public/500.html", layout: false, status: 500
+  end
+
+  def error404
+    render file: "#{Rails.root}/public/404.html", layout: false, status: 404
   end
 
 end
