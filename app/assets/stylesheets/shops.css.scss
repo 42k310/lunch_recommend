@@ -1,8 +1,8 @@
 body {
   width: 100%;
   background-image: image-url("tileable_wood_texture.png");
-//  background-image: none;
-//  background-color: #d9ccb3;
+  background-size: initial;
+  background-repeat: repeat;
 
   .content {
     margin: 30px auto;
@@ -276,7 +276,7 @@ body {
 
 //    background: -moz-linear-gradient(left top 315deg, #FFE0B2, #FFF3E0);
 //    background: -webkit-gradient(linear, left top, right bottom, from(#FFE0B2), to(#FFF3E0));
-    background-image: url(lightpaperfibers.png);
+    background-image: image-url("lightpaperfibers.png");
 
     width: 1000px;
     float: left;
