@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag "questions/shops", :media => "all" %>
+<%= stylesheet_link_tag "shops", :media => "all" %>
 <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css", :media => "all" %>
 <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
 
@@ -106,20 +106,19 @@
               <input type="submit" value="別の店舗">
           <% end %>
         </div>
+
         <div class="want_to_go">
           <%= form_tag({:controller => 'questions', :action => 'want_to_go'}) do %>
               <%= submit_tag(@want_to_go_btn_name, :id => 'want_to_go_submit') %>
           <% end %>
         </div>
+
         <div class="has_gone">
           <%= form_tag({:controller => 'questions', :action => 'has_gone'}) do %>
-              <div id="has_gone_submit">
-              <%= button_tag :type => "submit" do %>
-                  <%= @has_gone_btn_name %>
-              <% end %>
-              </div>
+              <%= submit_tag(@has_gone_btn_name, :id => 'has_gone_submit') %>
           <% end %>
         </div>
+
         <div class="clear"></div>
       </div>
     </div>

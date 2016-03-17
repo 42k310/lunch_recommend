@@ -30,7 +30,7 @@ Rails.application.configure do
   config.assets.compile = false
   config.assets.precompile += %w( *.js *.scss *.css *.less *.erb )
 
-  # Generate digests for assets URLs.
+  # Generate digests for assets URLs.49220
   config.assets.digest = true
 
   # `config.assets.precompile` has moved to config/initializers/assets.rb
