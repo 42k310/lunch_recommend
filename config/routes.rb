@@ -57,7 +57,7 @@ Rails.application.routes.draw do
   post "retry" => "questions#retry"
 
   # エラーページへ飛ばす
-  get "/404" => "errors/error404"
-  get "/500" => "errors/error500"
+  # get "/404" => "errors/error404"
+  # get "/500" => "errors/error_500"
 
 end

@@ -43,4 +43,16 @@ class ApplicationController < ActionController::Base
   rescue_from AbstractController::ActionNotFound, with: :error_404 unless Rails.env.development?
   rescue_from ActionController::RoutingError, with: :error_404 unless Rails.env.development?
 
+  # 500エラー
+  rescue_from Exception, with: :error_505 unless Rails.env.development?
+
+  def error_404
+    logger.info "Rendering 404 with exception: #{e.message}" if e
+    render template: 'errors/error_404', status: 404, content_type: 'text/html'
+  end
+  def error_500
+    logger.info "Rendering 500 with exception: #{e.message}" if e
+    render template: 'errors/error_404', status: 404, content_type: 'text/html'
+  end
+
 end

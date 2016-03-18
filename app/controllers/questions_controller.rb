@@ -18,15 +18,15 @@ class QuestionsController < ApplicationController
     @questions = Question.order("RANDOM()").limit(3)
 
     # @questionsの中身が存在し、その数が３つなら通常通り処理、そうでないならシステムエラー画面に飛ばす
-    if @questions.present?
-      if @questions.count == 3
-        render :action => "index"
-      else
-        error500
-      end
-    else
-      error500
-    end
+    # if @questions.present?
+    #   if @questions.count == 3
+    #     render :action => "index"
+    #   else
+    #     error500
+    #   end
+    # else
+    #   error500
+    # end
 
   end
 
@@ -504,14 +504,14 @@ class QuestionsController < ApplicationController
 
   end
 
-  def error500
-    render action: "errors/error500", status: 500
-    # render file: "#{Rails.root}/public/500.html", layout: false, status: 500
-  end
-
-  def error404
-    render action: "errors/error404", status: 404
-    # render file: "#{Rails.root}/public/404.html", layout: false, status: 404
-  end
+  # def error500
+  #   render action: "errors/error_500", status: 500
+  #   # render file: "#{Rails.root}/public/500.html", layout: false, status: 500
+  # end
+  #
+  # def error404
+  #   render action: "errors/error_404", status: 404
+  #   # render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+  # end
 
 end
