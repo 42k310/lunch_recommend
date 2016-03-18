@@ -497,7 +497,7 @@ class QuestionsController < ApplicationController
   end
 
   def error500
-    render file: "#{Rails.root}/public/500.html", layout: false, status: 500
+    render file: "#{Rails.root}/public/500.html.erb", layout: false, status: 500
   end
 
   def error404
