@@ -309,8 +309,8 @@ class QuestionsController < ApplicationController
       elsif voucher_type == 2
         @voucher = "×"
 
-    # 店舗のコメントを取得
-      @comment = Shop.where(shop_id: session[:shop_id])[0]["comment"]
+    # # 店舗のコメントを取得
+    #   @comment = Shop.where(shop_id: session[:shop_id])[0]["comment"]
     end
 
     @latitude = @rest_info["latitude"].to_f - @rest_info["latitude"].to_f * 0.00010695 + @rest_info["longitude"].to_f * 0.000017464 + 0.0046017
