@@ -505,11 +505,13 @@ class QuestionsController < ApplicationController
   end
 
   def error500
-    render file: "#{Rails.root}/public/500.html", layout: false, status: 500
+    render action: "errors/error500", status: 500
+    # render file: "#{Rails.root}/public/500.html", layout: false, status: 500
   end
 
   def error404
-    render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+    render action: "errors/error404", status: 404
+    # render file: "#{Rails.root}/public/404.html", layout: false, status: 404
   end
 
 end
