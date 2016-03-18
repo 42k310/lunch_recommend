@@ -9,6 +9,8 @@ class CreateShops < ActiveRecord::Migration
       t.string :tblg_id, :null => false, limit: 255
       #
       # t.integer :vouchers, :null => false
+      # 店舗コメント（店舗名の右に表示）
+      t.string :comment, :null => false, limit: 255
 
       t.timestamps
 
