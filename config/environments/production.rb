@@ -81,6 +81,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # エラーページを動的に編集（参考：http://goo.gl/KSHWQt）
+  # エラーページを動的に編集できるようにする
   config.exceptions_app = ->(env) { ErrorsController.action(:show).call(env) }
 end

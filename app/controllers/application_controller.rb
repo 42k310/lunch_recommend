@@ -40,8 +40,8 @@ class ApplicationController < ActionController::Base
   end
 
   # 404エラー
-  rescue_from AbstractController::ActionNotFound, with: :error_404 unless Rails.env.development?
-  rescue_from ActionController::RoutingError, with: :error_404 unless Rails.env.development?
+  # rescue_from AbstractController::ActionNotFound, with: :error_404 unless Rails.env.development?
+  # rescue_from ActionController::RoutingError, with: :error_404 unless Rails.env.development?
 
   # 500エラー
   rescue_from Exception, with: :error_505 unless Rails.env.development?
