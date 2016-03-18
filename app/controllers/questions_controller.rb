@@ -57,6 +57,11 @@ class QuestionsController < ApplicationController
     session[:question3] = q_id3
     session[:answer3] = answer3["answer_type"]
 
+    # 回答なしの場合は質問画面へリダイレクトする
+    if session[:answer].blank? || session[:answer1].blank? || session[:answer2].blank? || session[:answer3].blank?
+      redirect_to :action => "index"
+    end
+
     # セッションから店舗情報を取得
     @shop = nil
     if session[:shop_id].present?
@@ -303,6 +308,9 @@ class QuestionsController < ApplicationController
       @voucher = "○"
       elsif voucher_type == 2
         @voucher = "×"
+
+    # 店舗のコメントを取得
+      @comment = Shop.where(shop_id: session[:shop_id])[0]["comment"]
     end
 
     @latitude = @rest_info["latitude"].to_f - @rest_info["latitude"].to_f * 0.00010695 + @rest_info["longitude"].to_f * 0.000017464 + 0.0046017
