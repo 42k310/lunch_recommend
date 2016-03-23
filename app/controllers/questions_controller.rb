@@ -58,7 +58,7 @@ class QuestionsController < ApplicationController
     session[:answer3] = answer3["answer_type"]
 
     # 回答なしの場合は質問画面へリダイレクトする
-    if session[:answer].blank? || session[:answer1].blank? || session[:answer2].blank? || session[:answer3].blank?
+    if session[:answer1].blank? || session[:answer2].blank? || session[:answer3].blank?
       redirect_to :action => "index"
     end
 
