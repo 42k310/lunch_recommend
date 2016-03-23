@@ -4,6 +4,12 @@ body {
   background-size: initial;
   background-repeat: repeat;
 
+  .logo {
+    height: 100px;
+    text-align: center;
+    box-shadow: 0px 0px 8px 2px #fff;
+  }
+
   .content {
     margin: 30px auto;
 //    margin-right: 100px;
