@@ -5,148 +5,195 @@ body {
   background: image-url("restaurant.JPG") no-repeat center center;
   background-attachment: fixed;
   background-size: cover;
-//  text-align: center;
+  //  text-align: center;
 
   .logo {
     text-align: center;
     margin: 15px 0;
+
     img {
       height: 100px;
       box-shadow: 0px 0px 8px 2px #fff;
+    }
 
+  }
+
+  .square {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    right: 25%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    margin: 50px 0 50px 0;
+    padding: 0 0 10% 0;
+    height: 300px;
+    width: 50%;
+    border-radius: 5%;
+
+    #signin {
+      margin: 25%;
+    }
+    img {
+      width: 300px;
     }
   }
 
 }
 
-.square {
-  position: absolute;
-  top: 25%;
-  left: 25%;
-  right: 25%;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.4);
-  margin: 0 0 50px 0;
-  padding: 0 0 10% 0;
-  height: 300px;
-  width: 50%;
-  border-radius: 5%;
 
-  h1 {
-    color: #faf0e6;
-  }
 
-  #nothing {
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    background: #d0ad56;
-    padding: 20px 20px;
-    box-shadow: 0px 3px 2px #000;
-    border: 2px solid #aa872f;
-    margin: 0 auto;
-    margin-top: 15%;
 
-    input {
-      height: 120px;
-      width: 120px;
-      background-color: rgba(0, 0, 0, 0);
-      border-color: rgba(0, 0, 0, 0);
-      font-weight: bold;
-      font-size: 18px;
-      color: #FFFFFF;
-      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
-      word-wrap: break-word;
-      cursor: pointer;
-    }
 
-  }
-
-  .question_title {
-    p {
-      font-size: 28px;
-    }
-  }
-
-  #signin {
-    margin: 25%;
-  }
-  img {
-    width: 300px;
-  }
-}
-
-.square p {
-  color: snow;
-}
-
-.answer {
-  padding: 20px;
-
-  #ans1_left, #ans2_left, #ans3_left {
-    float: left;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    background: #d7834f;
-    padding: 20px 20px;
-    margin: 0 0 0 10%;
-    box-shadow: 0px 3px 2px #000;
-    border: 2px solid #b15d28;
-
-  }
-
-  #ans1_right, #ans2_right, #ans3_right {
-    float: right;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    background: #d0ad56;
-    padding: 20px 20px;
-    margin: 0 10% 0 0;
-    box-shadow: 0px 3px 2px #000;
-    border: 2px solid #aa872f;
-  }
-
-  input {
-    height: 120px;
-    width: 120px;
-    background-color: rgba(0, 0, 0, 0);
-    border-color: rgba(0, 0, 0, 0);
-    font-weight: bold;
-    font-size: 18px;
-    color: #FFFFFF;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
-    word-wrap: break-word;
-    cursor: pointer;
-  }
-}
-
-#ans_block1 {
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-  padding: 10% 10% 0 10%;
-}
-
-#ans_block2 {
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-  padding: 10% 10% 0 10%;
-  visibility: hidden;
-}
-
-#ans_block3 {
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-  padding: 10% 10% 0 10%;
-  visibility: hidden;
-}
+//body {
+//  height: 100%;
+//  width: 100%;
+//  margin: auto;
+//  background: image-url("restaurant.JPG") no-repeat center center;
+//  background-attachment: fixed;
+//  background-size: cover;
+////  text-align: center;
+//
+//  .logo {
+//    text-align: center;
+//    margin: 15px 0;
+//    img {
+//      height: 100px;
+//      box-shadow: 0px 0px 8px 2px #fff;
+//
+//    }
+//  }
+//
+//}
+//
+//.square {
+//  position: absolute;
+//  top: 25%;
+//  left: 25%;
+//  right: 25%;
+//  text-align: center;
+//  background-color: rgba(0, 0, 0, 0.4);
+//  margin: 50px 0 50px 0;
+//  padding: 0 0 10% 0;
+//  height: 300px;
+//  width: 50%;
+//  border-radius: 5%;
+//
+//  h1 {
+//    color: #faf0e6;
+//  }
+//
+//  #nothing {
+//    border-radius: 50%;
+//    width: 120px;
+//    height: 120px;
+//    background: #d0ad56;
+//    padding: 20px 20px;
+//    box-shadow: 0px 3px 2px #000;
+//    border: 2px solid #aa872f;
+//    margin: 0 auto;
+//    margin-top: 15%;
+//
+//    input {
+//      height: 120px;
+//      width: 120px;
+//      background-color: rgba(0, 0, 0, 0);
+//      border-color: rgba(0, 0, 0, 0);
+//      font-weight: bold;
+//      font-size: 18px;
+//      color: #FFFFFF;
+//      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+//      word-wrap: break-word;
+//      cursor: pointer;
+//    }
+//
+//  }
+//
+//  .question_title {
+//    p {
+//      font-size: 28px;
+//    }
+//  }
+//
+//  #signin {
+//    margin: 25%;
+//  }
+//  img {
+//    width: 300px;
+//  }
+//}
+//
+//.square p {
+//  color: snow;
+//}
+//
+//.answer {
+//  padding: 20px;
+//
+//  #ans1_left, #ans2_left, #ans3_left {
+//    float: left;
+//    border-radius: 50%;
+//    width: 120px;
+//    height: 120px;
+//    background: #d7834f;
+//    padding: 20px 20px;
+//    margin: 0 0 0 10%;
+//    box-shadow: 0px 3px 2px #000;
+//    border: 2px solid #b15d28;
+//
+//  }
+//
+//  #ans1_right, #ans2_right, #ans3_right {
+//    float: right;
+//    border-radius: 50%;
+//    width: 120px;
+//    height: 120px;
+//    background: #d0ad56;
+//    padding: 20px 20px;
+//    margin: 0 10% 0 0;
+//    box-shadow: 0px 3px 2px #000;
+//    border: 2px solid #aa872f;
+//  }
+//
+//  input {
+//    height: 120px;
+//    width: 120px;
+//    background-color: rgba(0, 0, 0, 0);
+//    border-color: rgba(0, 0, 0, 0);
+//    font-weight: bold;
+//    font-size: 18px;
+//    color: #FFFFFF;
+//    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+//    word-wrap: break-word;
+//    cursor: pointer;
+//  }
+//}
+//
+//#ans_block1 {
+//  position: absolute;
+//  top: 0%;
+//  bottom: 0%;
+//  left: 0%;
+//  right: 0%;
+//  padding: 10% 10% 0 10%;
+//}
+//
+//#ans_block2 {
+//  position: absolute;
+//  top: 0%;
+//  bottom: 0%;
+//  left: 0%;
+//  right: 0%;
+//  padding: 10% 10% 0 10%;
+//  visibility: hidden;
+//}
+//
+//#ans_block3 {
+//  position: absolute;
+//  top: 0%;
+//  bottom: 0%;
+//  left: 0%;
+//  right: 0%;
+//  padding: 10% 10% 0 10%;
+//  visibility: hidden;
+//}
