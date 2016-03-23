@@ -66,7 +66,8 @@ target_file_names.each do |target_file|
       CSV.foreach("db/seeds/development/csv/#{target_file}.csv") do |row|
         Shop.create(:id => row[0],
                     :gnavi_id => row[1],
-                    :tblg_id => row[2])
+                    :tblg_id => row[2],
+                    :comment => row[3])
         p "Loading #{Rails.env}:#{target_file}..."
       end
         elsif target_file == "questions"

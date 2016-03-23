@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20151225075347) do
   create_table "shops", force: true do |t|
     t.string   "gnavi_id",   null: false
     t.string   "tblg_id",    null: false
+    t.string   "comment",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

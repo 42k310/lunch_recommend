@@ -18,15 +18,15 @@ class QuestionsController < ApplicationController
     @questions = Question.order("RANDOM()").limit(3)
 
     # @questionsの中身が存在し、その数が３つなら通常通り処理、そうでないならシステムエラー画面に飛ばす
-    # if @questions.present?
-    #   if @questions.count == 3
-    #     render :action => "index"
-    #   else
-    #     error500
-    #   end
-    # else
-    #   error500
-    # end
+    if @questions.present?
+      if @questions.count == 3
+        render :action => "index"
+      else
+        error500
+      end
+    else
+      error500
+    end
 
   end
 
@@ -297,7 +297,6 @@ class QuestionsController < ApplicationController
     @lunch = @rest_info["lunch"]
     @address = @rest_info["address"]
     @tel = @rest_info["tel"]
-    # @voucher_type = Match.find(:conditions => ["shop_id = ? and question_id = ?", session[:shop_id], 8]).answer_type # 1：使える 2：使えない
     voucher_types = Match.where(shop_id: session[:shop_id]).where(question_id: 8)[0]
     p "voucher_types"
     p voucher_types
@@ -309,8 +308,8 @@ class QuestionsController < ApplicationController
       elsif voucher_type == 2
         @voucher = "×"
 
-    # # 店舗のコメントを取得
-    #   @comment = Shop.where(shop_id: session[:shop_id])[0]["comment"]
+    # 店舗のコメントを取得
+      @comment = Shop.where(shop_id: session[:shop_id])[0]["comment"]
     end
 
     @latitude = @rest_info["latitude"].to_f - @rest_info["latitude"].to_f * 0.00010695 + @rest_info["longitude"].to_f * 0.000017464 + 0.0046017
