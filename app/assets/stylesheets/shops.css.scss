@@ -5,9 +5,11 @@ body {
   background-repeat: repeat;
 
   .logo {
-    height: 100px;
-    text-align: center;
-    box-shadow: 0px 0px 8px 2px #fff;
+    img {
+      height: 100px;
+      text-align: center;
+      box-shadow: 0px 0px 8px 2px #fff;
+    }
   }
 
   .content {
