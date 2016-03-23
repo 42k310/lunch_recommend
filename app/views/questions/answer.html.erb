@@ -3,10 +3,14 @@
 <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
 
 <div class="content">
+  <div class="logo">
+    <%= image_tag "logo.png" %>
+  </div>
   <div class="upside_content">
     <div class="shop">
       <div class="shop_title">
         <h1><%= @name %></h1>
+        <p><%= @comment %></p>
       </div>
       <div class="shop_pic">
         <% if @shop_image.present? %>
