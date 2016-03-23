@@ -19,23 +19,25 @@ body {
   }
 
   .square {
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    right: 25%;
+//    position: absolute;
+//    top: 25%;
+//    left: 25%;
+//    right: 25%;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.4);
-    margin: 50px 0 50px 0;
+    margin: 50px 25%;
     padding: 0 0 10% 0;
     height: 300px;
     width: 50%;
     border-radius: 5%;
 
     #signin {
-      margin: 25%;
-    }
-    img {
-      width: 300px;
+      margin: 25% 0 0 0;
+
+      img {
+        width: 300px;
+        padding: 50% 0;
+      }
     }
   }
 
