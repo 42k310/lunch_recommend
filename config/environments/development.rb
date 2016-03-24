@@ -26,8 +26,6 @@ Rails.application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.compile = true
-  # config.assets.compile = false
-  # config.assets.precompile += %w( *.js *.scss *.css *.less *.erb )
   config.assets.debug = true
 
   # Adds additional error checking when serving assets at runtime.

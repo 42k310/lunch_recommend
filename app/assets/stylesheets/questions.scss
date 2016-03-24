@@ -5,10 +5,10 @@ body {
   background: image-url("restaurant_open.JPG") no-repeat center center;
   background-attachment: fixed;
   background-size: cover;
-  font-family: Avenir , "Open Sans" , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+  font-family: Avenir, "Open Sans", "Helvetica Neue", Helvetica, Arial, Verdana, Roboto, "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 
   input {
-    font-family: Avenir , "Open Sans" , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+    font-family: Avenir, "Open Sans", "Helvetica Neue", Helvetica, Arial, Verdana, Roboto, "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   }
 }
 
@@ -30,20 +30,39 @@ body {
     }
   }
 
-  #signin {
-    margin: 25%;
+  p {
+    color: #faf0e6;
   }
-  img {
-    width: 300px;
-  }
-}
 
-.square p {
-  color: #faf0e6;
+  #ans_block1, #ans_block2, #ans_block3 {
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    padding: 10% 20% 0 20%;
+  }
+
+  #ans_block2 {
+    visibility: hidden;
+  }
+
+  #ans_block3 {
+    visibility: hidden;
+  }
 }
 
 .answer {
   padding: 20px;
+
+  input {
+    border-color: rgba(0, 0, 0, 0);
+    font-weight: bold;
+    font-size: 18px;
+    color: #faf0e6;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
 
   #ans1_left, #ans2_left, #ans3_left {
     float: left;
@@ -58,15 +77,13 @@ body {
       margin: 0 0 0 10%;
       box-shadow: 0px 3px 2px #000;
       border-radius: 50%;
-      //    border: 2px solid #b15d28;
     }
 
     input:hover {
-      position:relative;
-      top:2px;
-      left:2px;
+      position: relative;
+      top: 2px;
+      left: 2px;
     }
-
   }
 
   #ans1_right, #ans2_right, #ans3_right {
@@ -81,55 +98,13 @@ body {
       padding: 20px 20px;
       margin: 0 10% 0 0;
       box-shadow: 0px 3px 2px #000;
-      border-radius: 50%;
       //    border: 2px solid #165C23;
     }
 
     input:hover {
-      position:relative;
-      top:2px;
-      left:2px;
+      position: relative;
+      top: 2px;
+      left: 2px;
     }
   }
-
-  input {
-    height: 120px;
-    width: 120px;
-    background-color: rgba(0, 0, 0, 0);
-    border-color: rgba(0, 0, 0, 0);
-    font-weight: bold;
-    font-size: 18px;
-    color: #faf0e6;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-  }
-}
-
-#ans_block1 {
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-  padding: 10% 10% 0 10%;
-}
-
-#ans_block2 {
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-  padding: 10% 10% 0 10%;
-  visibility: hidden;
-}
-
-#ans_block3 {
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-  padding: 10% 10% 0 10%;
-  visibility: hidden;
 }
