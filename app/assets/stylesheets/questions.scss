@@ -47,13 +47,11 @@ body {
 
   #ans1_left, #ans2_left, #ans3_left {
     float: left;
-    width: 120px;
-    height: 120px;
 
     input {
       border-radius: 50%;
-      width: 180px;
-      height: 180px;
+      width: 150px;
+      height: 150px;
       background: -moz-linear-gradient(left top 315deg, #FFAB00, #FFD740);
       background: -webkit-gradient(linear, left top, right bottom, from(#FFAB00), to(#FFD740));
       padding: 20px 20px;
@@ -73,13 +71,11 @@ body {
 
   #ans1_right, #ans2_right, #ans3_right {
     float: right;
-    width: 120px;
-    height: 120px;
 
     input {
       border-radius: 50%;
-      width: 180px;
-      height: 180px;
+      width: 150px;
+      height: 150px;
       background: -moz-linear-gradient(left top 315deg, #AEEA00, #EEFF41);
       background: -webkit-gradient(linear, left top, right bottom, from(#AEEA00), to(#EEFF41));
       padding: 20px 20px;
