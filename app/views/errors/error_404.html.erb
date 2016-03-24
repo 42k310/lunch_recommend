@@ -1,1 +1,15 @@
-404エラー
+<%= stylesheet_link_tag "errors", :media => "all" %>
+
+<body>
+<div id="main">
+  <!-- This file lives in public/500.html -->
+  <div class="error">
+    <h1>404 NOT FOUND</h1>
+
+    <p>お探しのページは存在しません</p>
+    <%= form_tag :action => "questions/index" do %>
+        TOPページヘ
+    <% end %>
+  </div>
+</div>
+</body>
