@@ -35,10 +35,10 @@ class QuestionsController < ApplicationController
     p ' QuestionsController - answer'
     p '---------------------------------'
 
-    # 回答なしの場合は回答してくださいページヘ遷移する
-    if params[:answer1].blank? || params[:answer2].blank? || params[:answer3].blank?
-      render :action => "errors/error_not_answer"
-    end
+    # # 回答なしの場合は回答してくださいページヘ遷移する
+    # if params[:answer1].blank? || params[:answer2].blank? || params[:answer3].blank?
+    #   render template: "errors/error_not_answer", layout: 'application'
+    # end
 
     # 回答情報をパラメータから取得
     answer1 = params[:answer1]
