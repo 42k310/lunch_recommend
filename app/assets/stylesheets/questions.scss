@@ -9,7 +9,6 @@ body {
 
   input {
     font-family: Avenir , "Open Sans" , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
-    word-wrap: break-word;
   }
 }
 
@@ -51,17 +50,22 @@ body {
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    background: -moz-linear-gradient(left top 315deg, #FFAB00, #FFD740);
-    background: -webkit-gradient(linear, left top, right bottom, from(#FFAB00), to(#FFD740));
-    padding: 20px 20px;
-    margin: 0 0 0 10%;
-    box-shadow: 0px 3px 2px #000;
-//    border: 2px solid #b15d28;
-    #ans1_left:hover, #ans2_left:hover, #ans3_left:hover {
+
+    input {
+      background: -moz-linear-gradient(left top 315deg, #FFAB00, #FFD740);
+      background: -webkit-gradient(linear, left top, right bottom, from(#FFAB00), to(#FFD740));
+      padding: 20px 20px;
+      margin: 0 0 0 10%;
+      box-shadow: 0px 3px 2px #000;
+      //    border: 2px solid #b15d28;
+    }
+
+    input:hover {
       position:relative;
       top:2px;
       left:2px;
     }
+
   }
 
   #ans1_right, #ans2_right, #ans3_right {
@@ -69,13 +73,17 @@ body {
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    background: -moz-linear-gradient(left top 315deg, #AEEA00, #EEFF41);
-    background: -webkit-gradient(linear, left top, right bottom, from(#AEEA00), to(#EEFF41));
-    padding: 20px 20px;
-    margin: 0 10% 0 0;
-    box-shadow: 0px 3px 2px #000;
-//    border: 2px solid #165C23;
-    #ans1_right, #ans2_right, #ans3_right {
+
+    input {
+      background: -moz-linear-gradient(left top 315deg, #AEEA00, #EEFF41);
+      background: -webkit-gradient(linear, left top, right bottom, from(#AEEA00), to(#EEFF41));
+      padding: 20px 20px;
+      margin: 0 10% 0 0;
+      box-shadow: 0px 3px 2px #000;
+      //    border: 2px solid #165C23;
+    }
+
+    input:hover {
       position:relative;
       top:2px;
       left:2px;
