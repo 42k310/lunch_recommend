@@ -24,9 +24,11 @@ body {
 .square {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.6);
-  margin: 25%;
+  margin: 0 25%;
   width: 50%;
   border-radius: 5%;
+  position: absolute;
+  top: 25%;
 
   .logo {
     text-align: center;
