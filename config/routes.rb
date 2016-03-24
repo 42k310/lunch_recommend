@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   post "retry" => "questions#retry"
 
   # エラーページへ飛ばす
+
+  match "*path" => "errors#error_404", via: :all
   # get "/404" => "errors/error404"
   # get "/500" => "errors/error_500"
 
