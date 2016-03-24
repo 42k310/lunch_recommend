@@ -143,7 +143,9 @@
                           <img src="<%= wanted_rest_info["image_url"]["shop_image1"] %>">
                         </a>
                     <% else %>
+                        <a href="<%= wanted_rest_info["url"] %>" target="_blank">
                         <%= image_tag "nothing.jpg" %>
+                            </a>
                     <% end %>
                 <% end %>
               </div>
@@ -176,7 +178,9 @@
                           <img src="<%= gone_rest_info["image_url"]["shop_image1"] %>">
                         </a>
                     <% else %>
+                        <a href="<%= gone_rest_info["url"] %>" target="_blank">
                         <%= image_tag "nothing.jpg" %>
+                        </a>
                     <% end %>
                 <% end %>
               </div>

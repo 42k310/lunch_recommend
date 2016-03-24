@@ -1,6 +1,9 @@
 <%= stylesheet_link_tag "sessions", :media => "all" %>
 
 <div class="square">
+  <div class="logo">
+    <%= image_tag("logo.PNG") %>
+  </div>
   <div id="signin">
     <%= link_to image_tag('sign-in-button.png', { :border => '0', :alt => 'sign-in-button'}), "#{Settings.google_api.oauth2_url}" %>
   </div>
