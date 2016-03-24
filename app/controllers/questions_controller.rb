@@ -22,10 +22,10 @@ class QuestionsController < ApplicationController
       if @questions.count == 3
         render :action => "index"
       else
-        error500
+        render :action => "errors/error_500"
       end
     else
-      error500
+      render :action => "errors/error_500"
     end
 
   end
