@@ -5,6 +5,16 @@ body {
   background-repeat: repeat;
   font-family: Avenir , "Open Sans" , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
 
+  input {
+    font-family: Avenir , "Open Sans" , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+  }
+
+  input:hover {
+    position:relative;
+    top:2px;
+    left:2px;
+  }
+
   .logo {
     text-align: center;
     margin: 15px 0;
@@ -166,9 +176,6 @@ body {
             cursor: pointer;
           }
           input:hover{
-            position:relative;
-            top:2px;
-            left:2px;
             background-image: -webkit-linear-gradient(top, #7CB342, #689F38);
           }
         }
@@ -193,9 +200,6 @@ body {
             cursor: pointer;
           }
           input:hover{
-            position:relative;
-            top:2px;
-            left:2px;
             background-image: -webkit-linear-gradient(top, #ff8686, #ff6c6c);
           }
         }
@@ -221,9 +225,6 @@ body {
               cursor: pointer;
             }
             input:hover {
-              position:relative;
-              top:2px;
-              left:2px;
               background-image: -webkit-linear-gradient(top, #FFE57F, #FFD740);
             }
           .after {
