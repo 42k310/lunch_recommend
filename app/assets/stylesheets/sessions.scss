@@ -5,6 +5,8 @@ body {
   width: 100%;
   margin: auto;
   background: image-url("restaurant.JPG") no-repeat center center;
+  background-attachment: fixed;
+  background-size: cover;
 
   input {
     font-family: Avenir, "Open Sans", "Helvetica Neue", Helvetica, Arial, Verdana, Roboto, "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;

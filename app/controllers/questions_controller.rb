@@ -13,8 +13,6 @@ class QuestionsController < ApplicationController
 
   def index
 
-    # TODO: Questionが取得できない・または3件取得できなかった場合、システムエラー画面に飛ばすこと（※要確認）
-    # TODO: システムエラー画面に飛ばせているかの確認方法を相澤さんへ確認
     @questions = Question.order("RANDOM()").limit(3)
 
     # @questionsの中身が存在し、その数が３つなら通常通り処理、そうでないならシステムエラー画面に飛ばす
@@ -37,6 +35,11 @@ class QuestionsController < ApplicationController
     p ' QuestionsController - answer'
     p '---------------------------------'
 
+    # 回答なしの場合は回答してくださいページヘ遷移する
+    if params[:answer1].blank? || params[:answer2].blank? || params[:answer3].blank?
+      render :action => "errors/error_not_answer"
+    end
+
     # 回答情報をパラメータから取得
     answer1 = params[:answer1]
     answer2 = params[:answer2]
@@ -56,11 +59,6 @@ class QuestionsController < ApplicationController
     session[:answer2] = answer2["answer_type"]
     session[:question3] = q_id3
     session[:answer3] = answer3["answer_type"]
-
-    # 回答なしの場合は回答してくださいページヘ遷移する
-    if session[:answer1].blank? || session[:answer2].blank? || session[:answer3].blank?
-      render :action => "errors/error_not_answer"
-    end
 
     # セッションから店舗情報を取得
     @shop = nil
