@@ -9,14 +9,8 @@ body {
 
   input {
     font-family: Avenir , "Open Sans" , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+    word-wrap: break-word;
   }
-
-  input:hover {
-    position:relative;
-    top:2px;
-    left:2px;
-  }
-
 }
 
 .square {
@@ -63,7 +57,11 @@ body {
     margin: 0 0 0 10%;
     box-shadow: 0px 3px 2px #000;
 //    border: 2px solid #b15d28;
-
+    #ans1_left:hover, #ans2_left:hover, #ans3_left:hover {
+      position:relative;
+      top:2px;
+      left:2px;
+    }
   }
 
   #ans1_right, #ans2_right, #ans3_right {
@@ -77,6 +75,11 @@ body {
     margin: 0 10% 0 0;
     box-shadow: 0px 3px 2px #000;
 //    border: 2px solid #165C23;
+    #ans1_right, #ans2_right, #ans3_right {
+      position:relative;
+      top:2px;
+      left:2px;
+    }
   }
 
   input {
@@ -88,7 +91,6 @@ body {
     font-size: 18px;
     color: #faf0e6;
     text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
-    word-wrap: break-word;
     cursor: pointer;
   }
 }
