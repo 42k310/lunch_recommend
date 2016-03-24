@@ -7,8 +7,8 @@ body {
   color: #2E2F30;
   text-align: center;
   margin: 0;
-  background: image-url("error500.jpg") no-repeat center center;
-  background-size: cover;
+  background-image: image-url("tileable_wood_texture.png") repeat;
+  background-size: initial;
   font-family: Avenir, "Open Sans", "Helvetica Neue", Helvetica, Arial, Verdana, Roboto, "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 
   #main {

@@ -1,0 +1,11 @@
+<%= stylesheet_link_tag "errors_not_answer", :media => "all" %>
+
+<body>
+<div id="main">
+  <!-- This file lives in public/500.html -->
+  <div class="error">
+    <h1>三つの質問に回答してください</h1>
+    <%= link_to "質問ページヘ", :controller => "questions", :action => "retry" %>
+  </div>
+</div>
+</body>

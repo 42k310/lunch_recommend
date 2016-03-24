@@ -57,9 +57,9 @@ class QuestionsController < ApplicationController
     session[:question3] = q_id3
     session[:answer3] = answer3["answer_type"]
 
-    # 回答なしの場合は質問画面へリダイレクトする
+    # 回答なしの場合は回答してくださいページヘ遷移する
     if session[:answer1].blank? || session[:answer2].blank? || session[:answer3].blank?
-      redirect_to :action => "index"
+      render :action => "errors/error_not_answer"
     end
 
     # セッションから店舗情報を取得
