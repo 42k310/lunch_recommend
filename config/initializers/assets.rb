@@ -6,8 +6,10 @@ Rails.application.config.assets.precompile += %w( questions/session.css )
 Rails.application.config.assets.precompile += %w( questions/questions.css )
 Rails.application.config.assets.precompile += %w( questions/answer.css )
 Rails.application.config.assets.precompile += %w( questions/shops.css )
-Rails.application.config.assets.precompile += %w( questions/sessions.css )
-
+Rails.application.config.assets.precompile += %w( session.css )
+Rails.application.config.assets.precompile += %w( questions.css )
+Rails.application.config.assets.precompile += %w( answer.css )
+Rails.application.config.assets.precompile += %w( shops.css )
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
