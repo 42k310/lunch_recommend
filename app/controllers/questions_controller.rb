@@ -287,7 +287,7 @@ class QuestionsController < ApplicationController
     @rest_info = @gnavi_info["rest"]
 
     # ぐるなびAPI利用
-    @name = @rest_info["name"]
+    @name = @rest_info["name"].tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z')
     @shop_url = @rest_info["url"]
     @shop_image = @rest_info["image_url"]["shop_image1"]
     @tel = @rest_info["tel"]

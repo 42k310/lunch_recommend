@@ -134,29 +134,29 @@
         <h1>行きたい</h1>
       </div>
       <div class="want_to_go_list">
-        <div class="want_to_go_shop">
+        <div class="want_to_go_shops">
+
           <% if @wanted_rest_infos.present? %>
-              <div class="want_to_go_pic">
-                <% @wanted_rest_infos.each do |wanted_rest_info| %>
-                    <% if wanted_rest_info["image_url"]["shop_image1"].present? %>
-                        <a href="<%= wanted_rest_info["url"] %>" target="_blank">
-                          <img src="<%= wanted_rest_info["image_url"]["shop_image1"] %>">
-                        </a>
-                    <% else %>
-                        <a href="<%= wanted_rest_info["url"] %>" target="_blank">
-                        <%= image_tag "nothing.jpg" %>
-                            </a>
-                    <% end %>
-                <% end %>
-              </div>
-                <div class="want_to_go_name">
-                  <% @wanted_rest_infos.each do |wanted_rest_info| %>
+              <% @wanted_rest_infos.each do |wanted_rest_info| %>
+                  <div class="want_to_go_shop">
+                    <div class="want_to_go_pic">
+                      <% if wanted_rest_info["image_url"]["shop_image1"].present? %>
+                          <a href="<%= wanted_rest_info["url"] %>" target="_blank">
+                            <img src="<%= wanted_rest_info["image_url"]["shop_image1"] %>">
+                          </a>
+                      <% else %>
+                          <a href="<%= wanted_rest_info["url"] %>" target="_blank">
+                            <%= image_tag "nothing.jpg" %>
+                          </a>
+                      <% end %>
+                    </div>
+                    <div class="want_to_go_name">
                       <a href="<%= wanted_rest_info["url"] %>" target="_blank">
-                        <p><%= wanted_rest_info["name"] %></p>
+                        <p><%= wanted_rest_info["name"].tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z') %></p>
                       </a>
-                  <% end %>
-                  <div class="clear"></div>
-              </div>
+                    </div>
+                  </div>
+              <% end %>
           <% else %>
               <p>「行きたい」登録している店舗はありません</p>
           <% end %>
@@ -169,29 +169,28 @@
         <h1>行った</h1>
       </div>
       <div class="has_gone_list">
-        <div class="has_gone_shop">
+        <div class="has_gone_shops">
           <% if @gone_rest_infos.present? %>
-              <div class="has_gone_pic">
-                <% @gone_rest_infos.each do |gone_rest_info| %>
-                    <% if gone_rest_info["image_url"]["shop_image1"].present? %>
-                        <a href="<%= gone_rest_info["url"] %>" target="_blank">
-                          <img src="<%= gone_rest_info["image_url"]["shop_image1"] %>">
-                        </a>
-                    <% else %>
-                        <a href="<%= gone_rest_info["url"] %>" target="_blank">
-                        <%= image_tag "nothing.jpg" %>
-                        </a>
-                    <% end %>
-                <% end %>
-              </div>
-              <div class="has_gone_name">
-                <% @gone_rest_infos.each do |gone_rest_info| %>
-                    <a href="<%= gone_rest_info["url"] %>" target="_blank">
-                      <p><%= gone_rest_info["name"] %></p>
-                    </a>
-                <% end %>
-                <div class="clear"></div>
-              </div>
+              <% @gone_rest_infos.each do |gone_rest_info| %>
+                  <div class="has_gone_shop">
+                    <div class="has_gone_pic">
+                      <% if gone_rest_info["image_url"]["shop_image1"].present? %>
+                          <a href="<%= gone_rest_info["url"] %>" target="_blank">
+                            <img src="<%= gone_rest_info["image_url"]["shop_image1"] %>">
+                          </a>
+                      <% else %>
+                          <a href="<%= gone_rest_info["url"] %>" target="_blank">
+                            <%= image_tag "nothing.jpg" %>
+                          </a>
+                      <% end %>
+                    </div>
+                    <div class="has_gone_name">
+                      <a href="<%= gone_rest_info["url"] %>" target="_blank">
+                        <p><%= gone_rest_info["name"].tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z') %></p>
+                      </a>
+                    </div>
+                  </div>
+              <% end %>
           <% else %>
               <p>「行った」登録している店舗はありません</p>
           <% end %>
