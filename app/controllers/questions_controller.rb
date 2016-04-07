@@ -13,6 +13,16 @@ class QuestionsController < ApplicationController
 
   def index
 
+    # TOPにアクセスしなおした場合にsessionをクリアする
+    session[:question1].clear
+    session[:answer1].clear
+    session[:question2].clear
+    session[:answer2].clear
+    session[:question3].clear
+    session[:answer3].clear
+    session[:displayed_shop_ids].clear
+    session[:shop_id] = "" # clearを使うとFixnumのエラーが出るので、一旦このかたちで対応
+
     @questions = Question.order("RANDOM()").limit(3)
 
     # @questionsの中身が存在し、その数が３つなら通常通り処理、そうでないならシステムエラー画面に飛ばす
@@ -59,6 +69,16 @@ class QuestionsController < ApplicationController
     session[:answer2] = answer2["answer_type"]
     session[:question3] = q_id3
     session[:answer3] = answer3["answer_type"]
+
+    p "----------------------------------------------------------"
+    p "デバッグ用（sessionに保存した質問・回答情報）"
+    p session[:question1]
+    p session[:answer1]
+    p session[:question2]
+    p session[:answer2]
+    p session[:question3]
+    p session[:answer3]
+    p "----------------------------------------------------------"
 
     # セッションから店舗情報を取得
     @shop = nil
@@ -471,9 +491,9 @@ class QuestionsController < ApplicationController
     # 個室情報
     elements_private_room.each do |element_private_room|
       private_room = element_private_room.inner_text
-      p "-----------------------------"
-      p private_room
-      p private_room.include?("個室")
+      # p "-----------------------------"
+      # p private_room
+      # p private_room.include?("個室")
 
       if private_room.include?("個室")
         @private_room = "個室あり"
@@ -487,9 +507,9 @@ class QuestionsController < ApplicationController
     # 喫煙情報
     elements_smoking.each do |element_smoking|
       smoking = element_smoking.inner_text
-      p "-----------------------------"
-      p smoking
-      p smoking.include?("喫煙可")
+      # p "-----------------------------"
+      # p smoking
+      # p smoking.include?("喫煙可")
 
       if smoking.include?("喫煙可")
         @smoking = "喫煙可"
@@ -500,15 +520,5 @@ class QuestionsController < ApplicationController
     end
 
   end
-
-  # def error500
-  #   render action: "errors/error_500", status: 500
-  #   # render file: "#{Rails.root}/public/500.html", layout: false, status: 500
-  # end
-  #
-  # def error404
-  #   render action: "errors/error_404", status: 404
-  #   # render file: "#{Rails.root}/public/404.html", layout: false, status: 404
-  # end
 
 end
