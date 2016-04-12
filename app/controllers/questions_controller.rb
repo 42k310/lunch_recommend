@@ -14,14 +14,22 @@ class QuestionsController < ApplicationController
   def index
 
     # TOPにアクセスしなおした場合にsessionをクリアする
-    session[:question1].clear
-    session[:answer1].clear
-    session[:question2].clear
-    session[:answer2].clear
-    session[:question3].clear
-    session[:answer3].clear
-    session[:displayed_shop_ids].clear
-    session[:shop_id] = "" # clearを使うとFixnumのエラーが出るので、一旦このかたちで対応
+    if session[:question1].present? && session[:answer1].present? && session[:question2].present? && session[:answer2].present? && session[:question3].present? && session[:answer3].present?
+      session[:question1].clear
+      session[:answer1].clear
+      session[:question2].clear
+      session[:answer2].clear
+      session[:question3].clear
+      session[:answer3].clear
+    end
+
+    if session[:displayed_shop_ids].present?
+      session[:displayed_shop_ids].clear
+    end
+
+    if session[:shop_id].present?
+      session[:shop_id] = "" # clearを使うとFixnumのエラーが出るので、一旦このかたちで対応
+    end
 
     @questions = Question.order("RANDOM()").limit(3)
 
