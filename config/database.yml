@@ -13,21 +13,21 @@ default: &default
 
 development:
   <<: *default
-  database: lunchdb_dev
-  username: lunch
-  password: lunch
+  database: ksatodb_dev
+  username: ksato
+  password: ksato
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: lunchdb_test
-  username: lunch
-  password: lunch
+  database: ksatodb_test
+  username: ksato
+  password: ksato
 
 production:
   <<: *default
-  database: lunchdb_prod
-  username: lunch
-  password: lunch
+  database: ksatodb_prod
+  username: ksato
+  password: ksato
