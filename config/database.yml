@@ -13,21 +13,21 @@ default: &default
 
 development:
   <<: *default
-  database: nplunchdb_dev
-  username: nplunch
-  password: nplunch
+  database: lunchdb_dev
+  username: lunch
+  password: lunch
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: nplunchdb_test
-  username: nplunch
-  password: nplunch
+  database: lunchdb_test
+  username: lunch
+  password: lunch
 
 production:
   <<: *default
-  database: nplunchdb_prod
-  username: nplunch
-  password: nplunch
+  database: lunchdb_prod
+  username: lunch
+  password: lunch

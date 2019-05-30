@@ -19,7 +19,8 @@
 
 config/settings.local.yml
 config/settings/*.local.yml
-config/settings/
+config/settings/*
 config/environments/*.local.yml
+config/secrets.yml
 
 Gemfile.lock
